@@ -189,7 +189,18 @@ namespace QMapleBot
             if (checkLevelTele1 && checkLevelTele2 && checkLevelTele4 && checkLevelTele5)
             {
                 Bot.checkTele = true;
-                Thread.Sleep(100);
+                Thread.Sleep(50);
+            }
+
+            // detect level use teleport base on skill equiped (DW)
+            bool checkLevelDW1 = Tool.PixelSearch(603, 520, 0xFF4400, ss);
+            bool checkLevelDW2 = Tool.PixelSearch(593, 530, 0xCC1100, ss);
+            bool checkLevelDW3 = Tool.PixelSearch(606, 549, 0x0099EE, ss);
+            bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
+            if (checkLevelDW1 && checkLevelDW2 && checkLevelDW3 && checkLevelDW4)
+            {
+                Bot.checkTele = true;
+                Thread.Sleep(50);
             }
         }
 
@@ -319,13 +330,16 @@ namespace QMapleBot
             bool checkAutoRun = Tool.PixelSearch(323, 239, 0x548FBA, ss);    // cancel autorun btn            
 
             // do some click to switch char
-            if ((checkLevel1 && checkLevel2 && checkLevel3 && checkLevelDK1 && checkLevelDK2 && checkLevelDK3 && checkAutoRun) ||
+            if ((checkLevel1 && checkLevel2 && checkLevel3 && checkLevelDK1 && checkLevelDK2 && checkLevelDK3) ||
                 (checkLevel1 && checkLevel2 && checkLevel3 && checkSubLevel4 && checkSubLevel1 && checkSubLevel2 && checkSubLevel3 &&
-                checkLevelDW1 && checkLevelDW2 && checkLevelDW3 && checkLevelDW4 && checkAutoRun))
+                checkLevelDW1 && checkLevelDW2 && checkLevelDW3 && checkLevelDW4))
             {
-                // press cancel autorun
-                Tool.Mouse_Click(Bot.hwnd, 350, 240);
-                Thread.Sleep(1000);
+                if (checkAutoRun)
+                {
+                    // press cancel autorun
+                    Tool.Mouse_Click(Bot.hwnd, 350, 240);
+                    Thread.Sleep(1000);
+                }
 
                 // press menu
                 Tool.Mouse_Click(Bot.hwnd, 775, 51);

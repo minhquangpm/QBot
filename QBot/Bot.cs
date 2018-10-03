@@ -202,8 +202,6 @@ namespace QMapleBot
         // worker run bot
         private static void Worker_RunBot(object sender, DoWorkEventArgs e)
         {
-            
-
             // bot main functions
             while (true)
             {
