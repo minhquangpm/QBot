@@ -202,6 +202,8 @@ namespace QMapleBot
         // worker run bot
         private static void Worker_RunBot(object sender, DoWorkEventArgs e)
         {
+            
+
             // bot main functions
             while (true)
             {
@@ -212,20 +214,20 @@ namespace QMapleBot
                     return;
                 }
 
+                // allow bot to be paused
+                pause_bot.WaitOne(Timeout.Infinite);
+
                 // capture screenshot every time the bot finish a round of loop
                 if (hwnd != IntPtr.Zero)
                 {
                     ss = Tool.PrintWindow(hwnd);
 
-                    // allow bot to be paused
-                    pause_bot.WaitOne(Timeout.Infinite);
-
-                    //Game.Do_Quest(ss);
-                    //Game.Do_Skip(ss);
-                    //Game.Do_Confirm(ss);
-                    //Game.Do_Claim(ss);
-                    //Game.Do_Equip(ss);
-                    //Game.Do_Available(ss);
+                    Game.Do_Quest(ss);
+                    Game.Do_Skip(ss);
+                    Game.Do_Confirm(ss);
+                    Game.Do_Claim(ss);
+                    Game.Do_Equip(ss);
+                    Game.Do_Available(ss);
 
                     //if (checkTele)
                     //{
@@ -265,7 +267,7 @@ namespace QMapleBot
         {
             var start_info = new ProcessStartInfo();
             start_info.FileName = @"C:\Program Files (x86)\Nox\bin\Nox.exe";
-            start_info.Arguments = "-clone:" + nox_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1024 -performance:middle";
+            start_info.Arguments = "-clone:" + nox_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1200 -performance:middle";
             Process.Start(start_info);
         }
 
@@ -283,35 +285,89 @@ namespace QMapleBot
 
                 ss = Tool.PrintWindow(hwnd);
 
-                // select 2nd char if current char is 1st
+                // 1st char => 2nd char
                 bool checkCurrentChar1a = Tool.PixelSearch(218, 290, 0xFFC812, ss);
                 bool checkCurrentChar1b = Tool.PixelSearch(225, 292, 0xA3C54B, ss);
-                if (checkCurrentChar1a && checkCurrentChar1b)
+                bool checkNextChar1a = Tool.PixelSearch(265, 316, 0x8A5713, ss);
+                bool checkNextChar1b = Tool.PixelSearch(320, 316, 0x8A5713, ss);
+                if (checkCurrentChar1a && checkCurrentChar1b && checkNextChar1a && checkNextChar1b)
                 {
                     Tool.Mouse_Click(Bot.hwnd, 294, 257); // switch 2nd char
                     Thread.Sleep(1000);
                     Tool.Mouse_Click(Bot.hwnd, 675, 488); // press start
                     Thread.Sleep(1000);
+
+                    // resume auto bot
+                    pause_bot.Set();
+
+                    // stop this thread
+                    worker3.CancelAsync();
                 }
 
-                // select 3rd char if current char is 2nd
+                // 2nd char => 3rd char
                 bool checkCurrentChar2a = Tool.PixelSearch(342, 290, 0xFFC812, ss);
                 bool checkCurrentChar2b = Tool.PixelSearch(350, 292, 0xA3C54B, ss);
-                if (checkCurrentChar2a && checkCurrentChar2b)
+                bool checkNextChar2a = Tool.PixelSearch(391, 316, 0x8A5713, ss);
+                bool checkNextChar2b = Tool.PixelSearch(448, 316, 0x8A5713, ss);
+                if (checkCurrentChar2a && checkCurrentChar2b && checkNextChar2a && checkNextChar2b)
                 {
                     Tool.Mouse_Click(Bot.hwnd, 418, 262); // switch 3rd char
                     Thread.Sleep(1000);
                     Tool.Mouse_Click(Bot.hwnd, 675, 488); // press start
                     Thread.Sleep(1000);
+
+                    // resume auto bot
+                    pause_bot.Set();
+
+                    // stop this thread
+                    worker3.CancelAsync();
                 }
 
-                // release resource
-                //ss2.Dispose();
+                // 3rd char => 4th char
+                bool checkCurrentChar3a = Tool.PixelSearch(446, 290, 0xFFC812, ss);
+                bool checkCurrentChar3b = Tool.PixelSearch(475, 292, 0xA3C54B, ss);
+                bool checkNextChar3a = Tool.PixelSearch(78, 497, 0x8A5713, ss);
+                bool checkNextChar3b = Tool.PixelSearch(134, 497, 0x8A5713, ss);
+                if (checkCurrentChar3a && checkCurrentChar3b && checkNextChar3a && checkNextChar3b)
+                {
+                    Tool.Mouse_Click(Bot.hwnd, 114, 435); // switch 4th char
+                    Thread.Sleep(1000);
+                    Tool.Mouse_Click(Bot.hwnd, 675, 488); // press start
+                    Thread.Sleep(1000);
 
-                // give the bot some breathes
-                Application.DoEvents();
+                    // resume auto bot
+                    pause_bot.Set();
+
+                    // stop this thread
+                    worker3.CancelAsync();
+                }
+
+                // 4th char => 5th char
+                bool checkCurrentChar4a = Tool.PixelSearch(150, 474, 0xFFC812, ss);
+                bool checkCurrentChar4b = Tool.PixelSearch(162, 473, 0xA7C84D, ss);
+                bool checkNextChar4a = Tool.PixelSearch(204, 497, 0x8A5713, ss);
+                bool checkNextChar4b = Tool.PixelSearch(260, 497, 0x8A5713, ss);
+                if (checkCurrentChar4a && checkCurrentChar4b && checkNextChar4a && checkNextChar4b)
+                {
+                    Tool.Mouse_Click(Bot.hwnd, 235, 434); // switch 5th char
+                    Thread.Sleep(1000);
+                    Tool.Mouse_Click(Bot.hwnd, 675, 488); // press start
+                    Thread.Sleep(1000);
+
+                    // resume auto bot
+                    pause_bot.Set();
+
+                    // stop this thread
+                    worker3.CancelAsync();
+                }
+
                 Thread.Sleep(1000);
+
+                // release resource
+                ss.Dispose();
+                Application.DoEvents();
             }
+            
         }
     }
 }

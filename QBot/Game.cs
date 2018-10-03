@@ -21,6 +21,15 @@ namespace QMapleBot
             bool checkAuto5 = Tool.PixelSearch(215, 591, 0xEADA9C, ss); // check top of T in AUTO (yellow)
             bool checkAuto6 = Tool.PixelSearch(222, 591, 0xAFA375, ss); // check top of O in AUTO (yellow)
 
+            bool checkQuestTab = Tool.PixelSearch(23, 145, 0xF9492B, ss);
+            if ((checkQuestTab && checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
+                (checkQuestTab && checkHp && checkAuto4 && checkAuto5 && checkAuto6))
+            {
+                Tool.Mouse_Click(Bot.hwnd, 13, 151);  // click open quest tab
+                Thread.Sleep(50);
+            }
+
+
             if ((checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
                (checkHp && checkAuto4 && checkAuto5 && checkAuto6))
             {
@@ -59,11 +68,24 @@ namespace QMapleBot
             // mini skip
             bool checkSkip1 = Tool.PixelSearch(42, 60, 0xFFFFFF, ss);    // check S in Skip>> (white)
             bool checkSkip2 = Tool.PixelSearch(88, 64, 0xFFFFFF, ss);    // check 2nd > in Skip>> (white)
-            bool checkSkip3 = Tool.PixelSearch(766, 64, 0xFFFFFF, ss);   // check x
-            bool checkSkip4 = Tool.PixelSearch(18, 64, 0x6F1405, ss);    // check hp when darker
-            if (checkSkip1 && checkSkip2 && checkSkip3 && checkSkip4)
+            bool checkSkip3 = Tool.PixelSearch(51, 65, 0xF8F8F5, ss);    // check k in Skip>> (white)
+            //bool checkSkip3 = Tool.PixelSearch(766, 64, 0xFFFFFF, ss);   // check x
+            //bool checkSkip4 = Tool.PixelSearch(18, 64, 0x6F1405, ss);    // check hp when darker
+            if (checkSkip1 && checkSkip2 && checkSkip3)
             {
                 Tool.Mouse_Click(Bot.hwnd, 56, 66);    // click skip
+                Thread.Sleep(50);
+                //Write_Log("Skip");
+            }
+
+            // big skip
+            bool checkSkipBig1 = Tool.PixelSearch(751, 99, 0xFFFFFF, ss);    // check S in SKIP (white)
+            bool checkSkipBig2 = Tool.PixelSearch(763, 109, 0xFEFEFE, ss);    // check K  in Skip (white)
+            bool checkSkipBig3 = Tool.PixelSearch(776, 107, 0xFFFFFF, ss);   // check I
+            bool checkSkipBig4 = Tool.PixelSearch(18, 64, 0xDD280A, ss);    // check hp when darker
+            if (checkSkipBig1 && checkSkipBig2 && checkSkipBig3 && checkSkipBig4)
+            {
+                Tool.Mouse_Click(Bot.hwnd, 770, 100);    // click skip
                 Thread.Sleep(50);
                 //Write_Log("Skip");
             }
@@ -276,12 +298,16 @@ namespace QMapleBot
             bool checkLevel3 = Tool.PixelSearch(30, 48, 0xF4D005, ss);    // near bot of 7
 
             // check 2nd number is 6 for cygnus
-            bool checkSubLevel1 = Tool.PixelSearch(37, 42, 0xd4b40b5, ss);    
-            bool checkSubLevel2 = Tool.PixelSearch(34, 46, 0xfdd600, ss);
-            bool checkSubLevel3 = Tool.PixelSearch(36, 49, 0xe1be05, ss); 
-            bool checkSubLevel4 = Tool.PixelSearch(37, 45, 0xebc708, ss); 
+            bool checkSubLevel1 = Tool.PixelSearch(37, 42, 0xD4B405, ss);
+            bool checkSubLevel2 = Tool.PixelSearch(34, 46, 0xFDD600, ss);
+            bool checkSubLevel3 = Tool.PixelSearch(36, 49, 0xE1BE05, ss);
+            bool checkSubLevel4 = Tool.PixelSearch(37, 45, 0xEBC708, ss);
 
-
+            // check lv60 DW skill exists
+            bool checkLevelDW1 = Tool.PixelSearch(603, 520, 0xFF4400, ss);
+            bool checkLevelDW2 = Tool.PixelSearch(593, 530, 0xCC1100, ss);
+            bool checkLevelDW3 = Tool.PixelSearch(606, 549, 0x0099EE, ss);
+            bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
 
             // check lv 60 DK skill exists
             bool checkLevelDK1 = Tool.PixelSearch(583, 521, 0x9966FF, ss);
@@ -289,13 +315,16 @@ namespace QMapleBot
             bool checkLevelDK3 = Tool.PixelSearch(583, 548, 0x9966FF, ss);
             bool checkLevelDK4 = Tool.PixelSearch(596, 535, 0xCC66FF, ss);
 
-            bool checkAutoRun = Tool.PixelSearch(323, 239, 0x548FBA, ss);    // cancel autorun btn
-            
-            if (checkLevel1 && checkLevel2 && checkLevel3 && 
-                checkLevelDK1 && checkLevelDK2 && checkLevelDK3 && checkAutoRun)
+            // check auto run
+            bool checkAutoRun = Tool.PixelSearch(323, 239, 0x548FBA, ss);    // cancel autorun btn            
+
+            // do some click to switch char
+            if ((checkLevel1 && checkLevel2 && checkLevel3 && checkLevelDK1 && checkLevelDK2 && checkLevelDK3 && checkAutoRun) ||
+                (checkLevel1 && checkLevel2 && checkLevel3 && checkSubLevel4 && checkSubLevel1 && checkSubLevel2 && checkSubLevel3 &&
+                checkLevelDW1 && checkLevelDW2 && checkLevelDW3 && checkLevelDW4 && checkAutoRun))
             {
                 // press cancel autorun
-                Tool.Mouse_Click(Bot.hwnd, 350, 240);   
+                Tool.Mouse_Click(Bot.hwnd, 350, 240);
                 Thread.Sleep(1000);
 
                 // press menu
@@ -314,7 +343,11 @@ namespace QMapleBot
                 Bot.pause_bot.Reset();
 
                 // start worker3 check level
-                Bot.worker3.RunWorkerAsync();
+                if (!Bot.worker3.IsBusy)
+                {
+                    Bot.worker3.RunWorkerAsync();
+                }
+                
             }
         }
 
