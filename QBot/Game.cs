@@ -334,6 +334,9 @@ namespace QMapleBot
                 (checkLevel1 && checkLevel2 && checkLevel3 && checkSubLevel4 && checkSubLevel1 && checkSubLevel2 && checkSubLevel3 &&
                 checkLevelDW1 && checkLevelDW2 && checkLevelDW3 && checkLevelDW4))
             {
+                // pause bot
+                Bot.pause_bot.Reset();
+
                 if (checkAutoRun)
                 {
                     // press cancel autorun
@@ -352,9 +355,6 @@ namespace QMapleBot
                 // press select char
                 Tool.Mouse_Click(Bot.hwnd, 407, 505);
                 Thread.Sleep(1000);
-
-                // pause bot
-                Bot.pause_bot.Reset();
 
                 // start worker3 check level
                 if (!Bot.worker3.IsBusy)
