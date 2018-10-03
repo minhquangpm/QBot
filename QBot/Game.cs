@@ -268,12 +268,52 @@ namespace QMapleBot
             }
         }
 
+        // check player level
+        public static void Do_CheckLevel(Bitmap ss)
+        {
+            bool checkLevel1 = Tool.PixelSearch(29, 42, 0xE4C405, ss);      // top left of 7
+            bool checkLevel2 = Tool.PixelSearch(32, 42, 0xEECA05, ss);      // top right of 7
+            bool checkLevel3 = Tool.PixelSearch(30, 48, 0xF4D005, ss);    // near bot of 7
+
+            bool checkSubLevel1 = Tool.PixelSearch(35, 49, 0xF7D205, ss);    // check 2nd number on lv
+            bool checkSubLevel2 = Tool.PixelSearch(36, 49, 0xCFB205, ss);    // check 2nd number is 1
+            
+            bool checkAutoRun = Tool.PixelSearch(323, 239, 0x548FBA, ss);    // cancel autorun btn
+            
+            if ((checkLevel1 && checkLevel2 && checkLevel3 && checkSubLevel1 && checkAutoRun) ||
+                (checkLevel1 && checkLevel2 && checkLevel3 && checkSubLevel2 && checkAutoRun))
+            {
+                // press cancel autorun
+                Tool.Mouse_Click(Bot.hwnd, 350, 240);   
+                Thread.Sleep(1000);
+
+                // press menu
+                Tool.Mouse_Click(Bot.hwnd, 775, 51);
+                Thread.Sleep(1000);
+
+                // press options
+                Tool.Mouse_Click(Bot.hwnd, 685, 584);
+                Thread.Sleep(1000);
+
+                // press select char
+                Tool.Mouse_Click(Bot.hwnd, 407, 505);
+                Thread.Sleep(1000);
+
+                // pause bot
+                Bot.pause_bot.Reset();
+
+                // start worker3 check level
+                Bot.worker3.RunWorkerAsync();
+            }
+        }
+
         // check game alive 
         public static void Do_CheckAlive(Bitmap ss)
         {
             /*
              * the game crash and somehow nox's tutorial pop up,
-             * we check the tutorial pixel to see if nox is crash
+             * we check the tutorial pixel to see if nox is crash.
+             * This is for 1gb ram only.
              */
             bool checkGameDis1 = Tool.PixelSearch(12, 37, 0xF200E9, ss);
             bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss);

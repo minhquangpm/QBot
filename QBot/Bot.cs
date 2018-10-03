@@ -39,11 +39,11 @@ namespace QMapleBot
         // init worker
         public static BackgroundWorker worker1 = null;
         public static BackgroundWorker worker2 = null;
-        //public BackgroundWorker worker3 = null;
+        public static BackgroundWorker worker3 = null;
 
         // init ss
         private static Bitmap ss = null;
-        //private static Bitmap ss2 = null;
+        private static Bitmap ss2 = null;
 
         // checkbox
         public static bool checkTele = false;
@@ -56,6 +56,9 @@ namespace QMapleBot
 
         // init label maple check alive
         public static Label check_alive;
+
+        // pause worker
+        public static ManualResetEvent pause_bot = new ManualResetEvent(true);
 
         public static void Init_Worker()
         {
@@ -70,15 +73,15 @@ namespace QMapleBot
                 WorkerSupportsCancellation = true
             };
 
-            //worker3 = new BackgroundWorker
-            //{
-            //    WorkerSupportsCancellation = true
-            //};
+            worker3 = new BackgroundWorker
+            {
+                WorkerSupportsCancellation = true
+            };
 
             // add work
             worker1.DoWork += Worker_RunBot;
             worker2.DoWork += Worker_GetHandle;
-            //worker3.DoWork += Worker_CheckLevel;
+            worker3.DoWork += Worker_SwitchChar;
 
             // get handle and set nox title
             worker2.RunWorkerAsync();
@@ -214,36 +217,39 @@ namespace QMapleBot
                 {
                     ss = Tool.PrintWindow(hwnd);
 
-                    Game.Do_Quest(ss);
-                    Game.Do_Skip(ss);
-                    Game.Do_Confirm(ss);
-                    Game.Do_Claim(ss);
-                    Game.Do_Equip(ss);
-                    Game.Do_Available(ss);
+                    // allow bot to be paused
+                    pause_bot.WaitOne(Timeout.Infinite);
 
-                    if (checkTele)
-                    {
-                        Game.Do_Teleport(ss);
-                    } else
-                    {
-                        Game.Do_CheckTeleport(ss);
-                    }
+                    //Game.Do_Quest(ss);
+                    //Game.Do_Skip(ss);
+                    //Game.Do_Confirm(ss);
+                    //Game.Do_Claim(ss);
+                    //Game.Do_Equip(ss);
+                    //Game.Do_Available(ss);
 
-                    Game.Do_Revive(ss);
-                    Game.Do_Skill(ss);
-                    Game.Do_CloseUnwantedPopUp(ss);
+                    //if (checkTele)
+                    //{
+                    //    Game.Do_Teleport(ss);
+                    //} else
+                    //{
+                    //    Game.Do_CheckTeleport(ss);
+                    //}
 
-                    Event.Do_Event(ss);
+                    //Game.Do_Revive(ss);
+                    //Game.Do_Skill(ss);
+                    //Game.Do_CloseUnwantedPopUp(ss);
 
-                    Tutorial.Do_Tutorial(ss);
-                    Tutorial.Tut_Pet(ss);
-                    Tutorial.Tut_Treasure(ss);
-                    Tutorial.Tut_Forge(ss);
-                    Tutorial.Tut_Fever(ss);
-                    Tutorial.Tut_Jewel(ss);
-                    Tutorial.Tut_Dungeon(ss);
-                    Tutorial.Tut_Auto(ss);
+                    //Event.Do_Event(ss);
 
+                    //Tutorial.Do_Tutorial(ss);
+                    //Tutorial.Tut_Pet(ss);
+                    //Tutorial.Tut_Treasure(ss);
+                    //Tutorial.Tut_Forge(ss);
+                    //Tutorial.Tut_Fever(ss);
+                    //Tutorial.Tut_Jewel(ss);
+                    //Tutorial.Tut_Dungeon(ss);
+                    //Tutorial.Tut_Auto(ss);
+                    Game.Do_CheckLevel(ss);
 
 
                     Thread.Sleep(1000);
@@ -259,44 +265,53 @@ namespace QMapleBot
         {
             var start_info = new ProcessStartInfo();
             start_info.FileName = @"C:\Program Files (x86)\Nox\bin\Nox.exe";
-            start_info.Arguments = "-clone:" + nox_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1500 -performance:middle";
+            start_info.Arguments = "-clone:" + nox_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1024 -performance:middle";
             Process.Start(start_info);
         }
 
         // worker check level
-        //private void Worker_CheckLevel(object sender, DoWorkEventArgs e)
-        //{
-        //    while (true)
-        //    {
-        //        if (worker3.CancellationPending)
-        //        {
-        //            // cancel worker when press Stop
-        //            e.Cancel = true;
-        //            return;
-        //        }
+        private static void Worker_SwitchChar(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                if (worker3.CancellationPending)
+                {
+                    // cancel worker when press Stop
+                    e.Cancel = true;
+                    return;
+                }
 
-        //        ss2 = Tool.PrintWindow(hwnd);
-        //        // detect level use teleport base on skill equiped (DK)
-        //        bool checkLevelTele1 = Tool.PixelSearch(583, 521, 0x9966FF, ss2);
-        //        bool checkLevelTele2 = Tool.PixelSearch(610, 521, 0x330066, ss2);
-        //        bool checkLevelTele4 = Tool.PixelSearch(583, 548, 0x9966FF, ss2);
-        //        bool checkLevelTele5 = Tool.PixelSearch(596, 535, 0xCC66FF, ss2);
-        //        if (checkLevelTele1 && checkLevelTele2 && checkLevelTele4 && checkLevelTele5)
-        //        {
-        //            checkTele = true;
+                ss = Tool.PrintWindow(hwnd);
 
-        //            // stop bot when tele is on
-        //            return;
-        //        }
+                // select 2nd char if current char is 1st
+                bool checkCurrentChar1a = Tool.PixelSearch(218, 290, 0xFFC812, ss);
+                bool checkCurrentChar1b = Tool.PixelSearch(225, 292, 0xA3C54B, ss);
+                if (checkCurrentChar1a && checkCurrentChar1b)
+                {
+                    Tool.Mouse_Click(Bot.hwnd, 294, 257); // switch 2nd char
+                    Thread.Sleep(1000);
+                    Tool.Mouse_Click(Bot.hwnd, 675, 488); // press start
+                    Thread.Sleep(1000);
+                }
 
+                // select 3rd char if current char is 2nd
+                bool checkCurrentChar2a = Tool.PixelSearch(342, 290, 0xFFC812, ss);
+                bool checkCurrentChar2b = Tool.PixelSearch(350, 292, 0xA3C54B, ss);
+                if (checkCurrentChar2a && checkCurrentChar2b)
+                {
+                    Tool.Mouse_Click(Bot.hwnd, 418, 262); // switch 3rd char
+                    Thread.Sleep(1000);
+                    Tool.Mouse_Click(Bot.hwnd, 675, 488); // press start
+                    Thread.Sleep(1000);
+                }
 
-        //        // release resource
-        //        ss2.Dispose();
+                // release resource
+                //ss2.Dispose();
 
-        //        // give the bot some breathes
-        //        Application.DoEvents();
-        //        Thread.Sleep(30000);
-        //    }
-        //}
+                // give the bot some breathes
+                Application.DoEvents();
+                Thread.Sleep(1000);
+            }
+        }
     }
 }

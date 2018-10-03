@@ -25,8 +25,20 @@ namespace QMapleBot
         {
             if (!Bot.worker1.IsBusy)
             {
-                // start worker1
+                // start worker1 run bot
                 Bot.worker1.RunWorkerAsync();
+
+                // enable btn
+                button1.Enabled = false;
+                button2.Enabled = true;
+
+                // change color of bot status
+                label4.Text = "On";
+                label4.ForeColor = Color.Lime;
+            } else
+            {
+                // resume worker1
+                Bot.pause_bot.Set();
                 button1.Enabled = false;
                 button2.Enabled = true;
 
@@ -46,17 +58,20 @@ namespace QMapleBot
         private void button2_Click(object sender, EventArgs e)
         {
             // stop worker1
-            Bot.worker1.CancelAsync();
+            //Bot.worker1.CancelAsync();
+            Bot.pause_bot.Reset();
+
             button2.Enabled = false;
             button1.Enabled = true;
 
+
             // stop worker3
-            //bot.worker3.CancelAsync();
+            Bot.worker3.CancelAsync();
 
             // stop tele
             Bot.checkTele = false;
             checkBox2.Checked = false;
-
+            
 
             // change color of bot status
             label4.Text = "Off";
@@ -65,6 +80,7 @@ namespace QMapleBot
 
         private void form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Bot.worker1.CancelAsync();
             Tool.RevertWindowTitle(Bot.hwnd);
         }
 

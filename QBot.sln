@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28010.2019
+VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QBot", "QMapleBot\QBot.csproj", "{7D1CDF2F-2BCE-45E3-B282-0E6653AE3C15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QBot", "QBot\QBot.csproj", "{7D1CDF2F-2BCE-45E3-B282-0E6653AE3C15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3077C8D2-0417-4477-B85E-326AB8C12173}
+		SolutionGuid = {2DA04747-6B11-45FB-9E56-4CA4C1E5153B}
 	EndGlobalSection
 EndGlobal
