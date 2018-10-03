@@ -229,28 +229,29 @@ namespace QMapleBot
                     Game.Do_Equip(ss);
                     Game.Do_Available(ss);
 
-                    //if (checkTele)
-                    //{
-                    //    Game.Do_Teleport(ss);
-                    //} else
-                    //{
-                    //    Game.Do_CheckTeleport(ss);
-                    //}
+                    if (checkTele)
+                    {
+                        Game.Do_Teleport(ss);
+                    }
+                    else
+                    {
+                        Game.Do_CheckTeleport(ss);
+                    }
 
-                    //Game.Do_Revive(ss);
-                    //Game.Do_Skill(ss);
-                    //Game.Do_CloseUnwantedPopUp(ss);
+                    Game.Do_Revive(ss);
+                    Game.Do_Skill(ss);
+                    Game.Do_CloseUnwantedPopUp(ss);
 
-                    //Event.Do_Event(ss);
+                    Event.Do_Event(ss);
 
-                    //Tutorial.Do_Tutorial(ss);
-                    //Tutorial.Tut_Pet(ss);
-                    //Tutorial.Tut_Treasure(ss);
-                    //Tutorial.Tut_Forge(ss);
-                    //Tutorial.Tut_Fever(ss);
-                    //Tutorial.Tut_Jewel(ss);
-                    //Tutorial.Tut_Dungeon(ss);
-                    //Tutorial.Tut_Auto(ss);
+                    Tutorial.Do_Tutorial(ss);
+                    Tutorial.Tut_Pet(ss);
+                    Tutorial.Tut_Treasure(ss);
+                    Tutorial.Tut_Forge(ss);
+                    Tutorial.Tut_Fever(ss);
+                    Tutorial.Tut_Jewel(ss);
+                    Tutorial.Tut_Dungeon(ss);
+                    Tutorial.Tut_Auto(ss);
                     Game.Do_CheckLevel(ss);
 
 
