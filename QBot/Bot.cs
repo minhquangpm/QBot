@@ -18,7 +18,7 @@ using System.Collections.Generic;
  *      [x] Auto Teleport
  *          [x] Auto Teleport when lv60+
  *      [ ] Auto Switch Char when lv 70
- *          [ ] Auto Switch Cygnus when lv78
+ *          [ ] Auto Switch Cygnus when lv76
  *      [ ] Auto Re-Login when crash game
  *
  * 

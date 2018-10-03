@@ -275,13 +275,24 @@ namespace QMapleBot
             bool checkLevel2 = Tool.PixelSearch(32, 42, 0xEECA05, ss);      // top right of 7
             bool checkLevel3 = Tool.PixelSearch(30, 48, 0xF4D005, ss);    // near bot of 7
 
-            bool checkSubLevel1 = Tool.PixelSearch(35, 49, 0xF7D205, ss);    // check 2nd number on lv
-            bool checkSubLevel2 = Tool.PixelSearch(36, 49, 0xCFB205, ss);    // check 2nd number is 1
-            
+            // check 2nd number is 6 for cygnus
+            bool checkSubLevel1 = Tool.PixelSearch(37, 42, 0xd4b40b5, ss);    
+            bool checkSubLevel2 = Tool.PixelSearch(34, 46, 0xfdd600, ss);
+            bool checkSubLevel3 = Tool.PixelSearch(36, 49, 0xe1be05, ss); 
+            bool checkSubLevel4 = Tool.PixelSearch(37, 45, 0xebc708, ss); 
+
+
+
+            // check lv 60 DK skill exists
+            bool checkLevelDK1 = Tool.PixelSearch(583, 521, 0x9966FF, ss);
+            bool checkLevelDK2 = Tool.PixelSearch(610, 521, 0x330066, ss);
+            bool checkLevelDK3 = Tool.PixelSearch(583, 548, 0x9966FF, ss);
+            bool checkLevelDK4 = Tool.PixelSearch(596, 535, 0xCC66FF, ss);
+
             bool checkAutoRun = Tool.PixelSearch(323, 239, 0x548FBA, ss);    // cancel autorun btn
             
-            if ((checkLevel1 && checkLevel2 && checkLevel3 && checkSubLevel1 && checkAutoRun) ||
-                (checkLevel1 && checkLevel2 && checkLevel3 && checkSubLevel2 && checkAutoRun))
+            if (checkLevel1 && checkLevel2 && checkLevel3 && 
+                checkLevelDK1 && checkLevelDK2 && checkLevelDK3 && checkAutoRun)
             {
                 // press cancel autorun
                 Tool.Mouse_Click(Bot.hwnd, 350, 240);   
