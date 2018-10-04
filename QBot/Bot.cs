@@ -282,10 +282,7 @@ namespace QMapleBot
                     return;
                 }
 
-                Thread.Sleep(5000);
-
-                // pause bot
-                Bot.pause_bot.Reset();
+                Thread.Sleep(3000);
 
                 ss = Tool.PrintWindow(hwnd);
 

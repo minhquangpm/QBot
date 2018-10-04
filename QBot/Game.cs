@@ -341,6 +341,8 @@ namespace QMapleBot
                     Thread.Sleep(1000);
                 }
 
+                
+
                 // press menu
                 Tool.Mouse_Click(Bot.hwnd, 775, 51);
                 Thread.Sleep(1000);
@@ -352,13 +354,23 @@ namespace QMapleBot
                 // press select char
                 Tool.Mouse_Click(Bot.hwnd, 407, 505);
                 Thread.Sleep(1000);
+            }
 
+            // check if it's switch char screen
+            bool checkCharScreen1 = Tool.PixelSearch(609, 142, 0x38A9D0, ss); // check crystals icon
+            bool checkCharScreen2 = Tool.PixelSearch(600, 417, 0xFFDD20, ss);   // check create char btn
+            bool checkCharScreen3 = Tool.PixelSearch(750, 196, 0xE6C58C, ss);   // check server banner
+            bool checkCharScreen4 = Tool.PixelSearch(729, 489, 0x8FB813, ss);   // check start btn
+            if (checkCharScreen1 && checkCharScreen2 && checkCharScreen3 && checkCharScreen4)
+            {
                 // start worker3 check level
                 if (!Bot.worker3.IsBusy)
                 {
                     Bot.worker3.RunWorkerAsync();
                 }
-                
+
+                // pause bot
+                Bot.pause_bot.Reset();
             }
         }
 
