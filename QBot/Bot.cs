@@ -131,7 +131,6 @@ namespace QMapleBot
                     {
                         // handle nox
                         hwnd = nox.MainWindowHandle;
-                        emulator = 1;
 
                         // change nox title
                         string nox_commandline = nox.GetCommandLine();
@@ -205,7 +204,6 @@ namespace QMapleBot
                     {
                         // handle itools
                         hwnd = memu.MainWindowHandle;
-                        emulator = 2;
 
                         // change itools title
                         string memu_commandline = memu.GetCommandLine();
@@ -248,19 +246,21 @@ namespace QMapleBot
                 {
                     for (int i = 0; i < 12; i++)
                     {
-                        string itools_clonename = "";
-                        if (i == 0)
+                        //string memu_clonename = "";
+                        //if (i == 0)
+                        //{
+                        //    memu_clonename = "MEmu";
+                        //}
+                        //else
+                        //{
+                        //    memu_clonename = "MEmu_" + i;
+                        //}
+
+                        string memu_clonename = "MEmu_" + i;
+
+                        if (!memu_list.Contains(memu_clonename))
                         {
-                            itools_clonename = "MEmu";
-                        }
-                        else
-                        {
-                            itools_clonename = "MEmu_" + i;
-                        }
-                        
-                        if (!memu_list.Contains(itools_clonename))
-                        {
-                            Run_Emu(itools_clonename);
+                            Run_Emu(memu_clonename);
                             break;
                         }
                     }
