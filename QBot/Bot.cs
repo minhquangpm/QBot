@@ -202,8 +202,6 @@ namespace QMapleBot
         // worker run bot
         private static void Worker_RunBot(object sender, DoWorkEventArgs e)
         {
-            
-
             // bot main functions
             while (true)
             {
@@ -284,6 +282,8 @@ namespace QMapleBot
                     return;
                 }
 
+                Thread.Sleep(3000);
+
                 ss = Tool.PrintWindow(hwnd);
 
                 // 1st char => 2nd char
@@ -361,8 +361,6 @@ namespace QMapleBot
                     // stop this thread
                     worker3.CancelAsync();
                 }
-
-                Thread.Sleep(1000);
 
                 // release resource
                 ss.Dispose();
