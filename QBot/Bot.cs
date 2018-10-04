@@ -266,7 +266,7 @@ namespace QMapleBot
         {
             var start_info = new ProcessStartInfo();
             start_info.FileName = @"C:\Program Files (x86)\Nox\bin\Nox.exe";
-            start_info.Arguments = "-clone:" + nox_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1200 -performance:middle";
+            start_info.Arguments = "-clone:" + nox_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1500 -performance:middle";
             Process.Start(start_info);
         }
 
@@ -300,6 +300,7 @@ namespace QMapleBot
 
                     // resume auto bot
                     pause_bot.Set();
+                    Bot.checkTele = false;
 
                     // stop this thread
                     worker3.CancelAsync();
@@ -319,6 +320,7 @@ namespace QMapleBot
 
                     // resume auto bot
                     pause_bot.Set();
+                    Bot.checkTele = false;
 
                     // stop this thread
                     worker3.CancelAsync();
@@ -338,6 +340,7 @@ namespace QMapleBot
 
                     // resume auto bot
                     pause_bot.Set();
+                    Bot.checkTele = false;
 
                     // stop this thread
                     worker3.CancelAsync();
@@ -357,6 +360,7 @@ namespace QMapleBot
 
                     // resume auto bot
                     pause_bot.Set();
+                    Bot.checkTele = false;
 
                     // stop this thread
                     worker3.CancelAsync();
