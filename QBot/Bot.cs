@@ -37,7 +37,7 @@ namespace QMapleBot
         public static IntPtr hwnd;
         public static int emulator;
         private static bool checkHwnd = false;
-        private static int pid = 0;
+        private static int pid;
 
         // init worker
         public static BackgroundWorker worker1 = null;
@@ -214,6 +214,7 @@ namespace QMapleBot
 
                         pid = memu.Id;
                         checkHwnd = true;
+                        check_memu = true;
 
                         // show name of nox
                         name.Invoke((Action)delegate
@@ -227,10 +228,6 @@ namespace QMapleBot
                             status.Text = "On";
                             status.ForeColor = Color.Lime;
                         });
-
-                        // save status nox exist
-                        check_memu = true;
-
 
                         break;
                     }
@@ -246,17 +243,15 @@ namespace QMapleBot
                 {
                     for (int i = 0; i < 12; i++)
                     {
-                        //string memu_clonename = "";
-                        //if (i == 0)
-                        //{
-                        //    memu_clonename = "MEmu";
-                        //}
-                        //else
-                        //{
-                        //    memu_clonename = "MEmu_" + i;
-                        //}
-
-                        string memu_clonename = "MEmu_" + i;
+                        string memu_clonename = "";
+                        if (i == 0)
+                        {
+                            memu_clonename = "MEmu";
+                        }
+                        else
+                        {
+                            memu_clonename = "MEmu_" + i;
+                        }
 
                         if (!memu_list.Contains(memu_clonename))
                         {
@@ -293,6 +288,7 @@ namespace QMapleBot
 
             while (true)
             {
+                //int pid = 0;
                 // get handle first time
                 if (!checkHwnd)
                 {
@@ -310,8 +306,8 @@ namespace QMapleBot
                 // check if no nox -> cancel all job
                 if (checkHwnd)
                 {
-                    if ((pid != 0 && !Process.GetProcessesByName("Nox").Any(x => x.Id == pid)) ||
-                        (pid != 0 && !Process.GetProcessesByName("Memu").Any(x => x.Id == pid)))
+                    if ((emulator == 1 && pid != 0 && !Process.GetProcessesByName("Nox").Any(x => x.Id == pid)) ||
+                        (emulator == 2 && pid != 0 && !Process.GetProcessesByName("Memu").Any(x => x.Id == pid)))
                     {
                         checkHwnd = false;
                         hwnd = IntPtr.Zero;
