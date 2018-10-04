@@ -282,6 +282,11 @@ namespace QMapleBot
                     return;
                 }
 
+                Thread.Sleep(5000);
+
+                // pause bot
+                Bot.pause_bot.Reset();
+
                 ss = Tool.PrintWindow(hwnd);
 
                 // 1st char => 2nd char
@@ -359,8 +364,6 @@ namespace QMapleBot
                     // stop this thread
                     worker3.CancelAsync();
                 }
-
-                Thread.Sleep(1000);
 
                 // release resource
                 ss.Dispose();
