@@ -37,6 +37,7 @@ namespace QMapleBot
         public static IntPtr hwnd;
         public static int emulator;
         private static bool checkHwnd = false;
+        private static int pid = 0;
 
         // init worker
         public static BackgroundWorker worker1 = null;
@@ -116,7 +117,7 @@ namespace QMapleBot
             }
         }
 
-        private static void GetHandleNox(int pid)
+        private static void GetHandleNox()
         {
             Process[] nox_running = Process.GetProcessesByName("nox");
             // get handle if there is nox running
@@ -190,7 +191,7 @@ namespace QMapleBot
             }
         }
 
-        private static void GetHandleMemu(int pid)
+        private static void GetHandleMemu()
         {
             Process[] memu_running = Process.GetProcessesByName("memu");
             // get handle if there is nox running
@@ -276,7 +277,7 @@ namespace QMapleBot
         // worker waiting to handle nox
         private static void Worker_GetHandle(object sender, DoWorkEventArgs e)
         {
-            int pid = 0;
+            
 
             // detect emu to run
             if (File.Exists(@"C:\Program Files (x86)\Nox\bin\Nox.exe"))
@@ -298,10 +299,10 @@ namespace QMapleBot
                     switch (emulator)
                     {
                         case 1:
-                            GetHandleNox(pid);
+                            GetHandleNox();
                             break;
                         case 2:
-                            GetHandleMemu(pid);
+                            GetHandleMemu();
                             break;
                     }
                 }
