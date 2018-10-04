@@ -46,12 +46,6 @@ namespace QMapleBot
                 label4.Text = "On";
                 label4.ForeColor = Color.Lime;
             }
-
-            // start check teleport when start bot
-            //if (!bot.worker3.IsBusy)
-            //{
-            //    bot.worker3.RunWorkerAsync();
-            //}
         }
 
         // stop btn
@@ -81,7 +75,7 @@ namespace QMapleBot
         private void form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Bot.worker1.CancelAsync();
-            Tool.RevertWindowTitle(Bot.hwnd);
+            Tool.RevertWindowTitle();
         }
 
         // hide window (just move window outside screen)
@@ -111,6 +105,11 @@ namespace QMapleBot
             {
                 Bot.checkTele = false;
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -19,7 +19,7 @@ namespace QMapleBot
             bool checkEventReturnC3 = Tool.PixelSearch(716, 142, 0xFFFFFF, ss); // white x icon
             if (checkEventReturnC1 && checkEventReturnC2 && checkEventReturnC3)
             {
-                Tool.Mouse_Click(Bot.hwnd, 716, 142);   // close event banner
+                Tool.Mouse_Click(716, 142);   // close event banner
                 Thread.Sleep(50);
             }
 
@@ -29,7 +29,7 @@ namespace QMapleBot
             bool checkEventGA3 = Tool.PixelSearch(750, 113, 0xD8A615, ss); // yellow x icon
             if (checkEventGA1 && checkEventGA2 && checkEventGA3)
             {
-                Tool.Mouse_Click(Bot.hwnd, 750, 113);   // close event banner
+                Tool.Mouse_Click(750, 113);   // close event banner
                 Thread.Sleep(50);
             }
 
@@ -39,7 +39,7 @@ namespace QMapleBot
             bool checkEvent2GA3 = Tool.PixelSearch(691, 150, 0xAD8B1A, ss); // yellow x icon
             if (checkEvent2GA1 && checkEvent2GA2 && checkEvent2GA3)
             {
-                Tool.Mouse_Click(Bot.hwnd, 691, 150);   // close event banner
+                Tool.Mouse_Click(691, 150);   // close event banner
                 Thread.Sleep(50);
             }
 
@@ -49,7 +49,7 @@ namespace QMapleBot
             bool checkEventPackage3 = Tool.PixelSearch(693, 150, 0xB8BFC6, ss); // grey x icon
             if (checkEventPackage1 && checkEventPackage2 && checkEventPackage3)
             {
-                Tool.Mouse_Click(Bot.hwnd, 693, 150);   // close event banner
+                Tool.Mouse_Click(693, 150);   // close event banner
                 Thread.Sleep(50);
             }
 
@@ -59,7 +59,7 @@ namespace QMapleBot
             bool checkEventPackage6 = Tool.PixelSearch(693, 150, 0x8BCBEB, ss); // blue x icon
             if (checkEventPackage4 && checkEventPackage5 && checkEventPackage6)
             {
-                Tool.Mouse_Click(Bot.hwnd, 693, 150);   // close event banner
+                Tool.Mouse_Click(693, 150);   // close event banner
                 Thread.Sleep(50);
             }
 
@@ -69,7 +69,7 @@ namespace QMapleBot
             bool checkRoyalStyle3 = Tool.PixelSearch(750, 111, 0xFDB8BC, ss); // blue x icon
             if (checkEventPackage4 && checkEventPackage5 && checkEventPackage6)
             {
-                Tool.Mouse_Click(Bot.hwnd, 750, 111);   // close event banner
+                Tool.Mouse_Click(750, 111);   // close event banner
                 Thread.Sleep(50);
             }
         }
