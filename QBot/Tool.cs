@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Net;
+using System.Net.Mail;
 
 namespace QMapleBot
 {
@@ -53,6 +55,38 @@ namespace QMapleBot
 
             Win32.SendMessage(Bot.hwnd, (int)Win32.WM_LBUTTONDOWN, (IntPtr)1, (IntPtr)lParam);
             Win32.SendMessage(Bot.hwnd, (int)Win32.WM_LBUTTONUP, (IntPtr)0, (IntPtr)lParam);
+        }
+
+        public static void SendGmail(string nox_id, string error_msg)
+        {
+            MailMessage msg = new MailMessage();
+
+            msg.From = new MailAddress("lolbadass6@gmail.com");
+            msg.To.Add("minhquangpm01@gmail.com");
+            msg.To.Add("quangvietvm@gmail.com");
+            msg.Subject = nox_id + " ERROR: " + DateTime.Now.ToString();
+            msg.Body = error_msg;
+            SmtpClient client = new SmtpClient();
+            client.UseDefaultCredentials = true;
+            client.Host = "smtp.gmail.com";
+            client.Port = 587;
+            client.EnableSsl = true;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Credentials = new NetworkCredential("lolbadass6@gmail.com", "botngu1234");
+            client.Timeout = 20000;
+            try
+            {
+                client.Send(msg);
+                //Console.Write("Mail has been successfully sent!");
+            }
+            catch (Exception ex)
+            {
+                //Console.Write("Fail Has error" + ex.Message);
+            }
+            finally
+            {
+                msg.Dispose();
+            }
         }
 
         // send log to textbox

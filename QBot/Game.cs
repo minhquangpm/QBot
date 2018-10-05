@@ -91,7 +91,7 @@ namespace QMapleBot
             }
         }
 
-        // run confirm tut
+        // run confirm btn
         public static void Do_Confirm(Bitmap ss)
         {
             bool checkConfirmTut1 = Tool.PixelSearch(656, 576, 0xFF7B50, ss);
@@ -103,13 +103,14 @@ namespace QMapleBot
                 //Write_Log("Confirm");
             }
 
+
+            // press confirm when dead message appear
             bool checkConfirmDead1 = Tool.PixelSearch(350, 431, 0xFF7B50, ss);
             bool checkConfirmDead2 = Tool.PixelSearch(459, 441, 0xFF7B50, ss);
             if (checkConfirmDead1 && checkConfirmDead2)
             {
                 Tool.Mouse_Click(402, 449);
                 Thread.Sleep(50);
-                //Write_Log("Confirm quest dead");
             }
         }
 
@@ -181,6 +182,10 @@ namespace QMapleBot
 
         public static void Do_CheckTeleport(Bitmap ss)
         {
+            /*
+             * ToDo: make auto teleport when level 5x
+             */
+
             // detect level use teleport base on skill equiped (DK)
             bool checkLevelTele1 = Tool.PixelSearch(583, 521, 0x9966FF, ss);
             bool checkLevelTele2 = Tool.PixelSearch(610, 521, 0x330066, ss);
@@ -286,7 +291,6 @@ namespace QMapleBot
             {
                 Tool.Mouse_Click(777, 129);   // Close player info
                 Thread.Sleep(50);
-                //Write_Log("Close player info");
             }
 
             // close mail
@@ -297,7 +301,6 @@ namespace QMapleBot
             {
                 Tool.Mouse_Click(648, 141);   // close mail 
                 Thread.Sleep(50);
-                //Write_Log("Close player info");
             }
         }
 
@@ -380,52 +383,23 @@ namespace QMapleBot
             /*
              * the game crash and somehow nox's tutorial pop up,
              * we check the tutorial pixel to see if nox is crash.
-             * This is for 1gb ram only.
              */
             bool checkGameDis1 = Tool.PixelSearch(12, 37, 0xF200E9, ss);
             bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss);
             bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss);
             if (checkGameDis1 && checkGameDis2 && checkGameDis3)
             {
-                Tool.Mouse_Click(397, 52);   // close nox tutorial 
-                Thread.Sleep(100);
-            }
+                string error_msg = Bot.name.Text + ": Maple has stop working";
+                Tool.SendGmail(Bot.name.Text, error_msg);
 
-            bool checkGameDis4 = Tool.PixelSearch(12, 37, 0x54005D, ss);
-            bool checkGameDis5 = Tool.PixelSearch(309, 514, 0x165437, ss);
-            bool checkGameDis6 = Tool.PixelSearch(315, 341, 0xFFFFFF, ss);
-            if (checkGameDis4 && checkGameDis5 && checkGameDis6)
-            {
-                Tool.Mouse_Click(401, 400);   // close nox tutorial 2
-                Thread.Sleep(100);
-            }
+                // start worker3 check level
+                if (!Bot.worker4.IsBusy)
+                {
+                    Bot.worker4.RunWorkerAsync();
+                }
 
-            bool checkGameDis7 = Tool.PixelSearch(270, 220, 0xF8B733, ss);
-            bool checkGameDis8 = Tool.PixelSearch(129, 199, 0x53C4F7, ss);
-            bool checkGameDis9 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss);
-            if (checkGameDis7 && checkGameDis8 && checkGameDis9)
-            {
-                Tool.Mouse_Click(531, 330);   // close nox tutorial 2
-                Thread.Sleep(100);
-            }
-
-            bool checkGameDis10 = Tool.PixelSearch(34, 42, 0x7F7F7F, ss);
-            bool checkGameDis11 = Tool.PixelSearch(775, 41, 0x7F7F7F, ss);
-            bool checkGameDis12 = Tool.PixelSearch(776, 55, 0xFFFFFF, ss);
-            if (checkGameDis10 && checkGameDis11 && checkGameDis12)
-            {
-                Tool.Mouse_Click(776, 55);   // close maple notice
-                Thread.Sleep(100);
-            }
-
-            // maple start screen
-            bool checkGameDis13 = Tool.PixelSearch(28, 168, 0xA1BA5F, ss);
-            bool checkGameDis14 = Tool.PixelSearch(548, 228, 0xF5791F, ss);
-            bool checkGameDis15 = Tool.PixelSearch(535, 338, 0xB68D53, ss);
-            if (checkGameDis13 && checkGameDis14 && checkGameDis15)
-            {
-                Tool.Mouse_Click(390, 479);   // press start
-                Thread.Sleep(100);
+                // pause bot
+                Bot.worker1.CancelAsync();
             }
         }
     }
