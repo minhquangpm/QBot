@@ -304,6 +304,15 @@ namespace QMapleBot
             }
         }
 
+        // detect stuck lv3-20
+        public static void Do_DetectStuck(Bitmap ss)
+        {
+            // level 5
+            bool checkLevel5a = Tool.PixelSearch(29, 42, 0xEECC09, ss);
+            bool checkLevel5b = Tool.PixelSearch(32, 42, 0xC3AD10, ss);
+            bool checkLevel5c = Tool.PixelSearch(32, 46, 0xF9D300, ss);
+        }
+
         // check player level
         public static void Do_CheckLevel(Bitmap ss)
         {
@@ -344,7 +353,6 @@ namespace QMapleBot
                     Thread.Sleep(1000);
                 }
 
-                
 
                 // press menu
                 Tool.Mouse_Click(775, 51);
@@ -358,6 +366,17 @@ namespace QMapleBot
                 Tool.Mouse_Click(407, 505);
                 Thread.Sleep(1000);
             }
+
+            // fix stuck at option ui
+            bool checkStuckOption1 = Tool.PixelSearch(19, 63, 0x410C03, ss);
+            bool checkStuckOption2 = Tool.PixelSearch(292, 195, 0xFF7B50, ss);
+            bool checkStuckOption3 = Tool.PixelSearch(398, 493, 0x548FBA, ss);
+            if (checkStuckOption1 && checkStuckOption2 && checkStuckOption3)
+            {
+                Tool.Mouse_Click(399, 505);   // press select char 
+                Thread.Sleep(1000);
+            }
+
 
             // check if it's switch char screen
             bool checkCharScreen1 = Tool.PixelSearch(609, 142, 0x38A9D0, ss); // check crystals icon
@@ -384,13 +403,13 @@ namespace QMapleBot
              * the game crash and somehow nox's tutorial pop up,
              * we check the tutorial pixel to see if nox is crash.
              */
-            bool checkGameDis1 = Tool.PixelSearch(12, 37, 0xF200E9, ss);
-            bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss);
+            bool checkGameDis1 = Tool.PixelSearch(12, 37, 0xD200E9, ss);
+            bool checkGameDis2 = Tool.PixelSearch(291, 514, 0x37D38A, ss);
             bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss);
             if (checkGameDis1 && checkGameDis2 && checkGameDis3)
             {
-                string error_msg = Bot.name.Text + ": Maple has stop working";
-                Tool.SendGmail(Bot.name.Text, error_msg);
+                //string error_msg = Bot.name.Text + ": Maple has stop working";
+                //Tool.SendGmail(Bot.name.Text, error_msg);
 
                 // start worker3 check level
                 if (!Bot.worker4.IsBusy)

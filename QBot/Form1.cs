@@ -64,7 +64,10 @@ namespace QMapleBot
 
         private void form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Bot.worker1.CancelAsync();
+            Bot.worker1.Dispose();
+            Bot.worker2.Dispose();
+            Bot.worker3.Dispose();
+            Bot.worker4.Dispose();
             Tool.RevertWindowTitle();
         }
 

@@ -47,7 +47,7 @@ namespace QMapleBot
 
         // init ss
         public static Bitmap ss = null;
-        //private static Bitmap ss2 = null;
+        private static Bitmap ss2 = null;
 
         // checkbox
         public static bool checkTele = false;
@@ -392,6 +392,8 @@ namespace QMapleBot
         // worker relogin
         private static void Worker_Relogin(object sender, DoWorkEventArgs e)
         {
+            MessageBox.Show("work4");
+
             while (true)
             {
                 // allow worker to stop
@@ -405,58 +407,98 @@ namespace QMapleBot
                 * the game crash and somehow nox's tutorial pop up,
                 * we check the tutorial pixel to see if nox is crash.
                 */
-                bool checkGameDis1 = Tool.PixelSearch(12, 37, 0xF200E9, ss);
-                bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss);
-                bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss);
+                ss2 = Tool.PrintWindow(hwnd);
+
+                bool checkGameDis1 = Tool.PixelSearch(410, 163, 0xFFFFFF, ss2);
+                bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss2);
+                bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss2);
                 if (checkGameDis1 && checkGameDis2 && checkGameDis3)
                 {
                     Tool.Mouse_Click(397, 52);   // close nox tutorial 
-                    Thread.Sleep(100);
+                    Thread.Sleep(1000);
                 }
 
-                bool checkGameDis4 = Tool.PixelSearch(12, 37, 0x54005D, ss);
-                bool checkGameDis5 = Tool.PixelSearch(309, 514, 0x165437, ss);
-                bool checkGameDis6 = Tool.PixelSearch(315, 341, 0xFFFFFF, ss);
+                bool checkGameDis4 = Tool.PixelSearch(12, 37, 0x54005D, ss2);
+                bool checkGameDis5 = Tool.PixelSearch(309, 514, 0x165437, ss2);
+                bool checkGameDis6 = Tool.PixelSearch(315, 341, 0xFFFFFF, ss2);
                 if (checkGameDis4 && checkGameDis5 && checkGameDis6)
                 {
                     Tool.Mouse_Click(401, 400);   // close nox tutorial 2
-                    Thread.Sleep(100);
+                    Thread.Sleep(1000);
                 }
 
-                bool checkGameDis7 = Tool.PixelSearch(270, 220, 0xF8B733, ss);
-                bool checkGameDis8 = Tool.PixelSearch(129, 199, 0x53C4F7, ss);
-                bool checkGameDis9 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss);
+                bool checkGameDis7 = Tool.PixelSearch(270, 220, 0xF8B733, ss2);
+                bool checkGameDis8 = Tool.PixelSearch(129, 199, 0x53C4F7, ss2);
+                bool checkGameDis9 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss2);
                 if (checkGameDis7 && checkGameDis8 && checkGameDis9)
                 {
                     Tool.Mouse_Click(531, 330);   // close nox tutorial 2
-                    Thread.Sleep(100);
+                    Thread.Sleep(1000);
                 }
 
-                bool checkGameDis10 = Tool.PixelSearch(34, 42, 0x7F7F7F, ss);
-                bool checkGameDis11 = Tool.PixelSearch(775, 41, 0x7F7F7F, ss);
-                bool checkGameDis12 = Tool.PixelSearch(776, 55, 0xFFFFFF, ss);
+                bool checkGameDis10 = Tool.PixelSearch(34, 42, 0x232C2C, ss2);
+                bool checkGameDis11 = Tool.PixelSearch(778, 42, 0x111616, ss2);
+                bool checkGameDis12 = Tool.PixelSearch(776, 55, 0xFFFFFF, ss2);
                 if (checkGameDis10 && checkGameDis11 && checkGameDis12)
                 {
                     Tool.Mouse_Click(776, 55);   // close maple notice
-                    Thread.Sleep(100);
+                    Thread.Sleep(1000);
                 }
 
                 // maple start screen
-                bool checkGameDis13 = Tool.PixelSearch(28, 168, 0xA1BA5F, ss);
-                bool checkGameDis14 = Tool.PixelSearch(548, 228, 0xF5791F, ss);
-                bool checkGameDis15 = Tool.PixelSearch(535, 338, 0xB68D53, ss);
+                bool checkGameDis13 = Tool.PixelSearch(28, 168, 0xA1BA5F, ss2);
+                bool checkGameDis14 = Tool.PixelSearch(548, 228, 0xF5791F, ss2);
+                bool checkGameDis15 = Tool.PixelSearch(535, 338, 0xB68D53, ss2);
                 if (checkGameDis13 && checkGameDis14 && checkGameDis15)
                 {
                     Tool.Mouse_Click(390, 479);   // press here to start
-                    Thread.Sleep(100);
+                    Thread.Sleep(1000);
                 }
 
                 // select current server to login
-
+                bool checkGameDis16 = Tool.PixelSearch(208, 136, 0x515F6E, ss2);
+                bool checkGameDis17 = Tool.PixelSearch(22, 524, 0xE8BB00, ss2);
+                bool checkGameDis18 = Tool.PixelSearch(401, 188, 0xF2F2F2, ss2);
+                if (checkGameDis16 && checkGameDis17 && checkGameDis18)
+                {
+                    Tool.Mouse_Click(368, 246);   // press here to start
+                    Thread.Sleep(1000);
+                }
 
                 // press start for current character
+                bool checkGameDis19 = Tool.PixelSearch(35, 329, 0xFF7B52, ss2);
+                bool checkGameDis20 = Tool.PixelSearch(605, 482, 0x9BBC17, ss2);
+                bool checkGameDis21 = Tool.PixelSearch(537, 329, 0xFF7B52, ss2);
+                if (checkGameDis19 && checkGameDis20 && checkGameDis21)
+                {
+                    Tool.Mouse_Click(654, 487);   // press here to start
+                    Thread.Sleep(1000);
+                }
 
-                
+                bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss2);       // check hp
+                bool checkMp = Tool.PixelSearch(15, 77, 0x0096FF, ss2);       // check mp
+
+                bool checkRevive1 = Tool.PixelSearch(188, 429, 0x548FBA, ss2);
+                bool checkRevive2 = Tool.PixelSearch(459, 419, 0x59B0A8, ss2);
+                bool checkRevive3 = Tool.PixelSearch(537, 420, 0xFF7B50, ss2);
+                if ((checkHp && checkMp) || (checkRevive1 && checkRevive2 && checkRevive3))
+                {
+                    // start worker1
+                    worker1.RunWorkerAsync();
+
+                    // release resource
+                    ss2.Dispose();
+                    Thread.Sleep(1000);
+
+                    // stop this worker
+                    worker4.CancelAsync();
+                }
+
+
+                // release resource
+                ss2.Dispose();
+                Thread.Sleep(1000);
+                Application.DoEvents();
             }
         }
     }
