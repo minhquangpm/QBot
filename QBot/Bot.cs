@@ -31,11 +31,11 @@ namespace QMapleBot
     {
         // nox clone name list
         private static List<string> nox_list = new List<string>();
-        private static List<string> memu_list = new List<string>();
+        //private static List<string> memu_list = new List<string>();
 
         // init handle
         public static IntPtr hwnd;
-        public static int emulator;
+        //public static int emulator;
         private static bool checkHwnd = false;
         private static int pid;
 
@@ -102,19 +102,10 @@ namespace QMapleBot
         private static void Run_Emu(string emu_id)
         {
             var start_info = new ProcessStartInfo();
-            switch (emulator)
-            {
-                case 1:
-                    start_info.FileName = @"C:\Program Files (x86)\Nox\bin\Nox.exe";
-                    start_info.Arguments = "-clone:" + emu_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1500 -performance:middle";
-                    Process.Start(start_info);
-                    break;
-                case 2:
-                    start_info.FileName = @"C:\Program Files\Microvirt\MEmu\MEmu.exe";
-                    start_info.Arguments = emu_id;
-                    Process.Start(start_info);
-                    break;
-            }
+            start_info.FileName = @"C:\Program Files (x86)\Nox\bin\Nox.exe";
+            start_info.Arguments = "-clone:" + emu_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1500 -performance:middle";
+            Process.Start(start_info);
+
         }
 
         private static void GetHandleNox()
@@ -190,124 +181,21 @@ namespace QMapleBot
             }
         }
 
-        private static void GetHandleMemu()
-        {
-            Process[] memu_running = Process.GetProcessesByName("memu");
-            // get handle if there is nox running
-            if (memu_running.Length >= 1)
-            {
-                bool check_memu = false;
-
-                foreach (Process memu in memu_running)
-                {
-                    if (memu.MainWindowTitle.Equals("(MemuPlayer)"))
-                    {
-                        // handle itools
-                        hwnd = memu.MainWindowHandle;
-
-                        // change itools title
-                        string memu_commandline = memu.GetCommandLine();
-                        string memu_clonename = memu_commandline.Split(' ')[2];
-
-                        Win32.SetWindowText(hwnd, memu_clonename);
-
-
-                        pid = memu.Id;
-                        checkHwnd = true;
-                        check_memu = true;
-
-                        // show name of nox
-                        name.Invoke((Action)delegate
-                        {
-                            name.Text = memu_clonename;
-                        });
-
-                        // change color of nox status
-                        status.Invoke((Action)delegate
-                        {
-                            status.Text = "On";
-                            status.ForeColor = Color.Lime;
-                        });
-
-                        break;
-                    }
-                    else
-                    {
-                        // add nox to list if its name already exist
-                        memu_list.Add(memu.MainWindowTitle.Trim());
-                    }
-                }
-
-                // run nox which does not exist in nox_list if there is no nox to handle
-                if (!check_memu)
-                {
-                    for (int i = 0; i < 12; i++)
-                    {
-                        string memu_clonename = "";
-                        if (i == 0)
-                        {
-                            memu_clonename = "MEmu";
-                        }
-                        else
-                        {
-                            memu_clonename = "MEmu_" + i;
-                        }
-
-                        if (!memu_list.Contains(memu_clonename))
-                        {
-                            Run_Emu(memu_clonename);
-                            break;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                // run first nox
-                Run_Emu("MEmu");
-            }
-        }
-
-
         // worker waiting to handle nox
         private static void Worker_GetHandle(object sender, DoWorkEventArgs e)
         {
-            
-
-            // detect emu to run
-            if (File.Exists(@"C:\Program Files (x86)\Nox\bin\Nox.exe"))
-            {
-                emulator = 1;
-            }
-            else if (File.Exists(@"C:\Program Files\Microvirt\MEmu\MEmu.exe"))
-            {
-                emulator = 2;
-            }
-
-
-
             while (true)
             {
-                //int pid = 0;
-                // get handle first time
                 if (!checkHwnd)
                 {
-                    switch (emulator)
-                    {
-                        case 1:
-                            GetHandleNox();
-                            break;
-                        case 2:
-                            GetHandleMemu();
-                            break;
-                    }
+                    GetHandleNox();
                 }
+                
 
                 // check if no nox -> cancel all job
                 if (checkHwnd)
                 {
-                    if ((emulator == 1 && pid != 0 && !Process.GetProcessesByName("Nox").Any(x => x.Id == pid)) ||
-                        (emulator == 2 && pid != 0 && !Process.GetProcessesByName("Memu").Any(x => x.Id == pid)))
+                    if (pid != 0 && !Process.GetProcessesByName("Nox").Any(x => x.Id == pid))
                     {
                         checkHwnd = false;
                         hwnd = IntPtr.Zero;
@@ -342,7 +230,7 @@ namespace QMapleBot
                 }
 
                 // allow bot to be paused
-                pause_bot.WaitOne(Timeout.Infinite);
+                //pause_bot.WaitOne(Timeout.Infinite);
 
                 // capture screenshot every time the bot finish a round of loop
                 if (hwnd != IntPtr.Zero)
@@ -420,8 +308,8 @@ namespace QMapleBot
                     Thread.Sleep(1000);
 
                     // resume auto bot
-                    pause_bot.Set();
-                    Bot.checkTele = false;
+                    Bot.worker1.RunWorkerAsync();
+                    checkTele = false;
 
                     // stop this thread
                     worker3.CancelAsync();
@@ -440,8 +328,8 @@ namespace QMapleBot
                     Thread.Sleep(1000);
 
                     // resume auto bot
-                    pause_bot.Set();
-                    Bot.checkTele = false;
+                    worker1.RunWorkerAsync();
+                    checkTele = false;
 
                     // stop this thread
                     worker3.CancelAsync();
@@ -460,7 +348,7 @@ namespace QMapleBot
                     Thread.Sleep(1000);
 
                     // resume auto bot
-                    pause_bot.Set();
+                    Bot.worker1.RunWorkerAsync();
                     Bot.checkTele = false;
 
                     // stop this thread
@@ -480,7 +368,7 @@ namespace QMapleBot
                     Thread.Sleep(1000);
 
                     // resume auto bot
-                    pause_bot.Set();
+                    Bot.worker1.RunWorkerAsync();
                     Bot.checkTele = false;
 
                     // stop this thread

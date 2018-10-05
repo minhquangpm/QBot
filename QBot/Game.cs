@@ -370,7 +370,7 @@ namespace QMapleBot
                 }
 
                 // pause bot
-                Bot.pause_bot.Reset();
+                Bot.worker1.CancelAsync();
             }
         }
 

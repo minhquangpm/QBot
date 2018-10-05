@@ -9,16 +9,7 @@ namespace QMapleBot
         // revert nox title
         public static void RevertWindowTitle()
         {
-            switch (Bot.emulator)
-            {
-                case 1:
-                    Win32.SetWindowText(Bot.hwnd, "NoxPlayer");
-                    break;
-                case 2:
-                    Win32.SetWindowText(Bot.hwnd, "(MemuPlayer)");
-                    break;
-            }
-            
+            Win32.SetWindowText(Bot.hwnd, "NoxPlayer");
         }
 
         // Take screenshot of Nox
@@ -45,21 +36,8 @@ namespace QMapleBot
             int shade = 10;
             Color colorInput = Color.FromArgb(colorName);
 
-            // detect pixel on different emu
-            Color colorFromEmulator = default(Color);
-            switch (Bot.emulator)
-            {
-                // nox
-                case 1:
-                    colorFromEmulator = ss.GetPixel(x, y);
-                    break;
-                // itools
-                case 2:
-                    colorFromEmulator = ss.GetPixel(x, y + 2);
-                    break;
-            }
-
-            //Color colorFromEmulator = ss.GetPixel(x - 1, y + 4);
+            // detect pixel 
+            Color colorFromEmulator = ss.GetPixel(x, y);
 
             return Math.Abs(colorInput.R - colorFromEmulator.R) <= shade &&
                 Math.Abs(colorInput.G - colorFromEmulator.G) <= shade &&
@@ -71,17 +49,7 @@ namespace QMapleBot
         public static void Mouse_Click(int x, int y)
         {
             // 
-            int lParam = 0;
-
-            switch (Bot.emulator)
-            {
-                case 1:
-                    lParam = (y << 16) | (x & 0xFFFF);
-                    break;
-                case 2:
-                    lParam = (y << 16) | (x + 2 & 0xFFFF);
-                    break;
-            }
+            int lParam = (y << 16) | (x & 0xFFFF);
 
             Win32.SendMessage(Bot.hwnd, (int)Win32.WM_LBUTTONDOWN, (IntPtr)1, (IntPtr)lParam);
             Win32.SendMessage(Bot.hwnd, (int)Win32.WM_LBUTTONUP, (IntPtr)0, (IntPtr)lParam);

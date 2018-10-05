@@ -140,7 +140,6 @@
             this.label4.Size = new System.Drawing.Size(21, 13);
             this.label4.TabIndex = 9;
             this.label4.Text = "Off";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 

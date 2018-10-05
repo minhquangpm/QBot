@@ -35,16 +35,6 @@ namespace QMapleBot
                 // change color of bot status
                 label4.Text = "On";
                 label4.ForeColor = Color.Lime;
-            } else
-            {
-                // resume worker1
-                Bot.pause_bot.Set();
-                button1.Enabled = false;
-                button2.Enabled = true;
-
-                // change color of bot status
-                label4.Text = "On";
-                label4.ForeColor = Color.Lime;
             }
         }
 
@@ -52,8 +42,8 @@ namespace QMapleBot
         private void button2_Click(object sender, EventArgs e)
         {
             // stop worker1
-            //Bot.worker1.CancelAsync();
-            Bot.pause_bot.Reset();
+            Bot.worker1.CancelAsync();
+            //Bot.pause_bot.Reset();
 
             button2.Enabled = false;
             button1.Enabled = true;
@@ -105,11 +95,6 @@ namespace QMapleBot
             {
                 Bot.checkTele = false;
             }
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
