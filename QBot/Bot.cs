@@ -43,6 +43,7 @@ namespace QMapleBot
         public static BackgroundWorker worker1 = null;
         public static BackgroundWorker worker2 = null;
         public static BackgroundWorker worker3 = null;
+        public static BackgroundWorker worker4 = null;
 
         // init ss
         public static Bitmap ss = null;
@@ -81,10 +82,16 @@ namespace QMapleBot
                 WorkerSupportsCancellation = true
             };
 
+            worker4 = new BackgroundWorker
+            {
+                WorkerSupportsCancellation = true
+            };
+
             // add work
             worker1.DoWork += Worker_RunBot;
             worker2.DoWork += Worker_GetHandle;
             worker3.DoWork += Worker_SwitchChar;
+            worker4.DoWork += Worker_Relogin;
 
             // get handle and set nox title
             worker2.RunWorkerAsync();
@@ -257,6 +264,9 @@ namespace QMapleBot
                     Game.Do_Skill(ss);
                     Game.Do_CloseUnwantedPopUp(ss);
 
+                    Game.Do_CheckLevel(ss);
+                    Game.Do_CheckAlive(ss);
+
                     Event.Do_Event(ss);
 
                     Tutorial.Do_Tutorial(ss);
@@ -267,8 +277,6 @@ namespace QMapleBot
                     Tutorial.Tut_Jewel(ss);
                     Tutorial.Tut_Dungeon(ss);
                     Tutorial.Tut_Auto(ss);
-                    Game.Do_CheckLevel(ss);
-
 
                     Thread.Sleep(1000);
 
@@ -308,7 +316,7 @@ namespace QMapleBot
                     Thread.Sleep(1000);
 
                     // resume auto bot
-                    Bot.worker1.RunWorkerAsync();
+                    worker1.RunWorkerAsync();
                     checkTele = false;
 
                     // stop this thread
@@ -348,8 +356,8 @@ namespace QMapleBot
                     Thread.Sleep(1000);
 
                     // resume auto bot
-                    Bot.worker1.RunWorkerAsync();
-                    Bot.checkTele = false;
+                    worker1.RunWorkerAsync();
+                    checkTele = false;
 
                     // stop this thread
                     worker3.CancelAsync();
@@ -379,7 +387,77 @@ namespace QMapleBot
                 ss.Dispose();
                 Application.DoEvents();
             }
-            
+        }
+
+        // worker relogin
+        private static void Worker_Relogin(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                // allow worker to stop
+                if (worker4.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                /*
+                * the game crash and somehow nox's tutorial pop up,
+                * we check the tutorial pixel to see if nox is crash.
+                */
+                bool checkGameDis1 = Tool.PixelSearch(12, 37, 0xF200E9, ss);
+                bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss);
+                bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss);
+                if (checkGameDis1 && checkGameDis2 && checkGameDis3)
+                {
+                    Tool.Mouse_Click(397, 52);   // close nox tutorial 
+                    Thread.Sleep(100);
+                }
+
+                bool checkGameDis4 = Tool.PixelSearch(12, 37, 0x54005D, ss);
+                bool checkGameDis5 = Tool.PixelSearch(309, 514, 0x165437, ss);
+                bool checkGameDis6 = Tool.PixelSearch(315, 341, 0xFFFFFF, ss);
+                if (checkGameDis4 && checkGameDis5 && checkGameDis6)
+                {
+                    Tool.Mouse_Click(401, 400);   // close nox tutorial 2
+                    Thread.Sleep(100);
+                }
+
+                bool checkGameDis7 = Tool.PixelSearch(270, 220, 0xF8B733, ss);
+                bool checkGameDis8 = Tool.PixelSearch(129, 199, 0x53C4F7, ss);
+                bool checkGameDis9 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss);
+                if (checkGameDis7 && checkGameDis8 && checkGameDis9)
+                {
+                    Tool.Mouse_Click(531, 330);   // close nox tutorial 2
+                    Thread.Sleep(100);
+                }
+
+                bool checkGameDis10 = Tool.PixelSearch(34, 42, 0x7F7F7F, ss);
+                bool checkGameDis11 = Tool.PixelSearch(775, 41, 0x7F7F7F, ss);
+                bool checkGameDis12 = Tool.PixelSearch(776, 55, 0xFFFFFF, ss);
+                if (checkGameDis10 && checkGameDis11 && checkGameDis12)
+                {
+                    Tool.Mouse_Click(776, 55);   // close maple notice
+                    Thread.Sleep(100);
+                }
+
+                // maple start screen
+                bool checkGameDis13 = Tool.PixelSearch(28, 168, 0xA1BA5F, ss);
+                bool checkGameDis14 = Tool.PixelSearch(548, 228, 0xF5791F, ss);
+                bool checkGameDis15 = Tool.PixelSearch(535, 338, 0xB68D53, ss);
+                if (checkGameDis13 && checkGameDis14 && checkGameDis15)
+                {
+                    Tool.Mouse_Click(390, 479);   // press here to start
+                    Thread.Sleep(100);
+                }
+
+                // select current server to login
+
+
+                // press start for current character
+
+                
+            }
         }
     }
 }
