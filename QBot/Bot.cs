@@ -61,7 +61,7 @@ namespace QMapleBot
         public static Label check_alive;
 
         // pause worker
-        public static ManualResetEvent pause_bot = new ManualResetEvent(true);
+        //public static ManualResetEvent pause_bot = new ManualResetEvent(true);
 
         public static void Init_Worker()
         {
@@ -103,7 +103,7 @@ namespace QMapleBot
         {
             var start_info = new ProcessStartInfo();
             start_info.FileName = @"C:\Program Files (x86)\Nox\bin\Nox.exe";
-            start_info.Arguments = "-clone:" + emu_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1500 -performance:middle";
+            start_info.Arguments = "-clone:" + emu_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1200 -performance:middle";
             Process.Start(start_info);
 
         }
@@ -163,7 +163,7 @@ namespace QMapleBot
                 // run nox which does not exist in nox_list if there is no nox to handle
                 if (!check_nox)
                 {
-                    for (int i = 0; i < 12; i++)
+                    for (int i = 0; i < 6; i++)
                     {
                         string nox_clonename = "Nox_" + i;
                         if (!nox_list.Contains(nox_clonename))
