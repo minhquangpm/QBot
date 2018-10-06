@@ -112,9 +112,9 @@ namespace QMapleBot
             if (File.Exists(@"C:\Program Files (x86)\Nox\bin\Nox.exe"))
             {
                 start_info.FileName = @"C:\Program Files (x86)\Nox\bin\Nox.exe";
-            } else if (File.Exists(@"D:\Program Files (x86)\Nox\bin\Nox.exe"))
+            } else if (File.Exists(@"D:\Program Files\Nox\bin\Nox.exe"))
             {
-                start_info.FileName = @"D:\Program Files (x86)\Nox\bin\Nox.exe";
+                start_info.FileName = @"D:\Program Files\Nox\bin\Nox.exe";
             }
 
             start_info.Arguments = "-clone:" + emu_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1200 -performance:middle";
