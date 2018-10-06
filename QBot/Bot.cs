@@ -170,7 +170,7 @@ namespace QMapleBot
                 // run nox which does not exist in nox_list if there is no nox to handle
                 if (!check_nox)
                 {
-                    for (int i = 0; i < 6; i++)
+                    for (int i = 0; i < 12; i++)
                     {
                         string nox_clonename = "Nox_" + i;
                         if (!nox_list.Contains(nox_clonename))
