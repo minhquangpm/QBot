@@ -267,10 +267,10 @@ namespace QMapleBot
             }
 
             // elite dungeon tut
-            bool checkEliteDungeon1 = Tool.PixelSearch(188, 263, 0xD9C7D3, ss);
-            bool checkEliteDungeon2 = Tool.PixelSearch(334, 264, 0xBFC8C2, ss);
+            bool checkEliteDungeon1 = Tool.PixelSearch(188, 237, 0xD9C7D3, ss);
+            //bool checkEliteDungeon2 = Tool.PixelSearch(334, 264, 0xBFC8C2, ss);
             bool checkEliteDungeon3 = Tool.PixelSearch(220, 282, 0xFF7B41, ss);
-            if (checkEliteDungeon1 && checkEliteDungeon2 && checkEliteDungeon3)
+            if (checkEliteDungeon1 && checkEliteDungeon3)
             {
                 Tool.Mouse_Click(264, 284);   // click elite dungeon icon tut
                 Thread.Sleep(50);
