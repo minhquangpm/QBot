@@ -110,7 +110,7 @@ namespace QMapleBot
         {
             var start_info = new ProcessStartInfo();
             start_info.FileName = @"C:\Program Files (x86)\Nox\bin\Nox.exe";
-            start_info.Arguments = "-clone:" + emu_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1200 -performance:middle";
+            start_info.Arguments = "-clone:" + emu_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1024 -performance:middle";
             Process.Start(start_info);
 
         }
@@ -302,6 +302,17 @@ namespace QMapleBot
                 Thread.Sleep(3000);
 
                 ss = Tool.PrintWindow(hwnd);
+
+                // close attendance pop up
+                bool checkPopup1 = Tool.PixelSearch(17, 122, 0xFFFFFF, ss);
+                bool checkPopup2 = Tool.PixelSearch(497, 129, 0x515F6E, ss);
+                bool checkPopup3 = Tool.PixelSearch(711, 172, 0x548FBA, ss);
+                bool checkPopup4 = Tool.PixelSearch(779, 131, 0xFFFFFF, ss);
+                if (checkPopup1 && checkPopup2 && checkPopup3 && checkPopup4)
+                {
+                    Tool.Mouse_Click(779, 131); // switch 3rd char
+                    Thread.Sleep(500);
+                }
 
                 // 1st char => 2nd char
                 bool checkCurrentChar1a = Tool.PixelSearch(218, 290, 0xFFC812, ss);
