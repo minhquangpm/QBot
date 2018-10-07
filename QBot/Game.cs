@@ -201,7 +201,7 @@ namespace QMapleBot
             bool checkLevelDW1 = Tool.PixelSearch(603, 520, 0xFF4400, ss);
             bool checkLevelDW2 = Tool.PixelSearch(593, 530, 0xCC1100, ss);
             bool checkLevelDW3 = Tool.PixelSearch(606, 549, 0x0099EE, ss);
-            bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFF4400, ss);
+            bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
             if (checkLevelDW1 && checkLevelDW2 && checkLevelDW3 && checkLevelDW4)
             {
                 Bot.checkTele = true;
@@ -330,7 +330,7 @@ namespace QMapleBot
             bool checkLevelDW1 = Tool.PixelSearch(603, 520, 0xFF4400, ss);
             bool checkLevelDW2 = Tool.PixelSearch(593, 530, 0xCC1100, ss);
             bool checkLevelDW3 = Tool.PixelSearch(606, 549, 0x0099EE, ss);
-            bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFF4400, ss);
+            bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
 
             // check lv 60 DK skill exists
             bool checkLevelDK1 = Tool.PixelSearch(583, 521, 0x9966FF, ss);

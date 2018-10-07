@@ -403,7 +403,7 @@ namespace QMapleBot
         // worker relogin
         private static void Worker_Relogin(object sender, DoWorkEventArgs e)
         {
-            MessageBox.Show("work4");
+            //MessageBox.Show("work4");
 
             while (true)
             {
@@ -472,7 +472,18 @@ namespace QMapleBot
                 bool checkGameDis18 = Tool.PixelSearch(401, 188, 0xF2F2F2, ss2);
                 if (checkGameDis16 && checkGameDis17 && checkGameDis18)
                 {
-                    Tool.Mouse_Click(368, 246);   // press here to start
+                    Tool.Mouse_Click(368, 246);   // press current server
+                    Thread.Sleep(1000);
+                }
+
+                // close attendance pop up
+                bool checkPopup1 = Tool.PixelSearch(17, 122, 0xFFFFFF, ss2);
+                bool checkPopup2 = Tool.PixelSearch(497, 129, 0x515F6E, ss2);
+                bool checkPopup3 = Tool.PixelSearch(711, 172, 0x548FBA, ss2);
+                bool checkPopup4 = Tool.PixelSearch(779, 131, 0xFFFFFF, ss2);
+                if (checkPopup1 && checkPopup2 && checkPopup3 && checkPopup4)
+                {
+                    Tool.Mouse_Click(779, 131); // close pop up
                     Thread.Sleep(1000);
                 }
 
