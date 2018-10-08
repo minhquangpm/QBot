@@ -394,6 +394,23 @@ namespace QMapleBot
                 // pause bot
                 Bot.worker1.CancelAsync();
             }
+
+            // check if it's attendance pop up
+            bool checkPopup1 = Tool.PixelSearch(17, 122, 0xFFFFFF, ss);
+            bool checkPopup2 = Tool.PixelSearch(497, 129, 0x515F6E, ss);
+            bool checkPopup3 = Tool.PixelSearch(711, 172, 0x548FBA, ss);
+            bool checkPopup4 = Tool.PixelSearch(779, 131, 0xFFFFFF, ss);
+            if (checkPopup1 && checkPopup2 && checkPopup3 && checkPopup4)
+            {
+                // start worker3 check level
+                if (!Bot.worker3.IsBusy)
+                {
+                    Bot.worker3.RunWorkerAsync();
+                }
+
+                // pause bot
+                Bot.worker1.CancelAsync();
+            }
         }
 
         // check game alive 

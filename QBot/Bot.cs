@@ -332,13 +332,6 @@ namespace QMapleBot
                     Thread.Sleep(1000);
                     Tool.Mouse_Click(675, 488); // press start
                     Thread.Sleep(1000);
-
-                    // resume auto bot
-                    worker1.RunWorkerAsync();
-                    checkTele = false;
-
-                    // stop this thread
-                    worker3.CancelAsync();
                 }
 
                 // 2nd char => 3rd char
@@ -352,13 +345,6 @@ namespace QMapleBot
                     Thread.Sleep(1000);
                     Tool.Mouse_Click(675, 488); // press start
                     Thread.Sleep(1000);
-
-                    // resume auto bot
-                    worker1.RunWorkerAsync();
-                    checkTele = false;
-
-                    // stop this thread
-                    worker3.CancelAsync();
                 }
 
                 // 3rd char => 4th char
@@ -372,13 +358,6 @@ namespace QMapleBot
                     Thread.Sleep(1000);
                     Tool.Mouse_Click(675, 488); // press start
                     Thread.Sleep(1000);
-
-                    // resume auto bot
-                    worker1.RunWorkerAsync();
-                    checkTele = false;
-
-                    // stop this thread
-                    worker3.CancelAsync();
                 }
 
                 // 4th char => 5th char
@@ -392,7 +371,16 @@ namespace QMapleBot
                     Thread.Sleep(1000);
                     Tool.Mouse_Click(675, 488); // press start
                     Thread.Sleep(1000);
+                }
 
+                bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss2);       // check hp
+                bool checkMp = Tool.PixelSearch(15, 77, 0x0096FF, ss2);       // check mp
+
+                bool checkRevive1 = Tool.PixelSearch(188, 429, 0x548FBA, ss2);
+                bool checkRevive2 = Tool.PixelSearch(459, 419, 0x59B0A8, ss2);
+                bool checkRevive3 = Tool.PixelSearch(537, 420, 0xFF7B50, ss2);
+                if ((checkHp && checkMp) || (checkRevive1 && checkRevive2 && checkRevive3))
+                {
                     // resume auto bot
                     Bot.worker1.RunWorkerAsync();
                     Bot.checkTele = false;
