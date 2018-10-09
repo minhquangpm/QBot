@@ -317,7 +317,7 @@ namespace QMapleBot
                 bool checkPopup4 = Tool.PixelSearch(779, 131, 0xFFFFFF, ss);
                 if (checkPopup1 && checkPopup2 && checkPopup3 && checkPopup4)
                 {
-                    Tool.Mouse_Click(779, 131); // switch 3rd char
+                    Tool.Mouse_Click(779, 131);
                     Thread.Sleep(500);
                 }
 
@@ -373,9 +373,13 @@ namespace QMapleBot
                     Thread.Sleep(1000);
                 }
 
+                // close event
+                Event.Do_Event(ss);
+
                 Game.Do_Skip(ss);
                 Game.Do_Confirm(ss);
 
+                // check if go into play screen
                 bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss);       // check hp
                 bool checkMp = Tool.PixelSearch(15, 77, 0x0096FF, ss);       // check mp
 

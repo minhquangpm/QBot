@@ -201,8 +201,8 @@ namespace QMapleBot
             bool checkLevelDW1 = Tool.PixelSearch(603, 520, 0xFF4400, ss);
             bool checkLevelDW2 = Tool.PixelSearch(593, 530, 0xCC1100, ss);
             bool checkLevelDW3 = Tool.PixelSearch(606, 549, 0x0099EE, ss);
-            bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
-            if (checkLevelDW1 && checkLevelDW2 && checkLevelDW3 && checkLevelDW4)
+            //bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
+            if (checkLevelDW1 && checkLevelDW2 && checkLevelDW3)
             {
                 Bot.checkTele = true;
                 Thread.Sleep(50);
@@ -330,7 +330,7 @@ namespace QMapleBot
             bool checkLevelDW1 = Tool.PixelSearch(603, 520, 0xFF4400, ss);
             bool checkLevelDW2 = Tool.PixelSearch(593, 530, 0xCC1100, ss);
             bool checkLevelDW3 = Tool.PixelSearch(606, 549, 0x0099EE, ss);
-            bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
+            //bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
 
             // check lv 60 DK skill exists
             bool checkLevelDK1 = Tool.PixelSearch(583, 521, 0x9966FF, ss);
@@ -344,7 +344,7 @@ namespace QMapleBot
             // do some click to switch char
             if ((checkLevel1 && checkLevel2 && checkLevel3 && checkLevelDK1 && checkLevelDK2 && checkLevelDK3) ||
                 (checkLevel1 && checkLevel2 && checkLevel3 && checkSubLevel4 && checkSubLevel1 && checkSubLevel2 && checkSubLevel3 &&
-                checkLevelDW1 && checkLevelDW2 && checkLevelDW3 && checkLevelDW4))
+                checkLevelDW1 && checkLevelDW2 && checkLevelDW3))
             {
                 if (checkAutoRun)
                 {
@@ -428,7 +428,7 @@ namespace QMapleBot
                 //string error_msg = Bot.name.Text + ": Maple has stop working";
                 //Tool.SendGmail(Bot.name.Text, error_msg);
 
-                // start worker3 check level
+                // start worker4
                 if (!Bot.worker4.IsBusy)
                 {
                     Bot.worker4.RunWorkerAsync();
