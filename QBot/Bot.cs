@@ -376,6 +376,9 @@ namespace QMapleBot
                 // close event
                 Event.Do_Event(ss);
 
+                Game.Do_Skip(ss);
+                Game.Do_Confirm(ss);
+
                 // check if go into play screen
                 bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss);       // check hp
                 bool checkMp = Tool.PixelSearch(15, 77, 0x0096FF, ss);       // check mp
