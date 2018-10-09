@@ -317,7 +317,7 @@ namespace QMapleBot
                 bool checkPopup4 = Tool.PixelSearch(779, 131, 0xFFFFFF, ss);
                 if (checkPopup1 && checkPopup2 && checkPopup3 && checkPopup4)
                 {
-                    Tool.Mouse_Click(779, 131); // switch 3rd char
+                    Tool.Mouse_Click(779, 131);
                     Thread.Sleep(500);
                 }
 
@@ -373,12 +373,16 @@ namespace QMapleBot
                     Thread.Sleep(1000);
                 }
 
-                bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss2);       // check hp
-                bool checkMp = Tool.PixelSearch(15, 77, 0x0096FF, ss2);       // check mp
+                // close event
+                Event.Do_Event(ss);
 
-                bool checkRevive1 = Tool.PixelSearch(188, 429, 0x548FBA, ss2);
-                bool checkRevive2 = Tool.PixelSearch(459, 419, 0x59B0A8, ss2);
-                bool checkRevive3 = Tool.PixelSearch(537, 420, 0xFF7B50, ss2);
+                // check if go into play screen
+                bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss);       // check hp
+                bool checkMp = Tool.PixelSearch(15, 77, 0x0096FF, ss);       // check mp
+
+                bool checkRevive1 = Tool.PixelSearch(188, 429, 0x548FBA, ss);
+                bool checkRevive2 = Tool.PixelSearch(459, 419, 0x59B0A8, ss);
+                bool checkRevive3 = Tool.PixelSearch(537, 420, 0xFF7B50, ss);
                 if ((checkHp && checkMp) || (checkRevive1 && checkRevive2 && checkRevive3))
                 {
                     // resume auto bot
