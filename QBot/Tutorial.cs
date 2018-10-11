@@ -262,7 +262,7 @@ namespace QMapleBot
             bool checkDailyDungeon3 = Tool.PixelSearch(120, 189, 0xFBFBFB, ss);
             if (checkDailyDungeon1 && checkDailyDungeon2 && checkDailyDungeon3)
             {
-                Tool.Mouse_Click(124, 185);   // click daily dungeon icon tut
+                Tool.Mouse_Click(110, 253);   // click daily dungeon icon tut
                 Thread.Sleep(50);
             }
 

@@ -237,6 +237,7 @@ namespace QMapleBot
                 //Write_Log("Use Skill");
             }
 
+            bool checkSkillTabOpen = Tool.PixelSearch(356, 194, 0xFF7B50, ss);
             bool checkSkillEquip = Tool.PixelSearch(723, 227, 0x68717A, ss);
             bool checkSkillMain1 = Tool.PixelSearch(719, 253, 0xFF7B50, ss);    // not maxed skill 1
             bool checkSkillMain2 = Tool.PixelSearch(717, 255, 0xC2C2C2, ss);    // maxed skill 1
@@ -246,7 +247,7 @@ namespace QMapleBot
             bool checkSkillTab3 = Tool.PixelSearch(777, 129, 0xFFFFFF, ss);
 
             // check if skill equip
-            if (!checkSkillEquip)
+            if (!checkSkillEquip && checkSkillTabOpen)
             {
                 Tool.Mouse_Click(665, 261);  // click equip
                 Thread.Sleep(50);
@@ -254,7 +255,7 @@ namespace QMapleBot
                 Thread.Sleep(50);
             }
             // check if skill not max level
-            if (checkSkillMain1)
+            if (checkSkillMain1 && checkSkillTabOpen)
             {
                 //Write_Log("Skill up");
                 Tool.Mouse_Click(737, 260);  // level up 1st skill

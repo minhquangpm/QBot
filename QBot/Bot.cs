@@ -158,7 +158,7 @@ namespace QMapleBot
                     if (noxVM_ram > 700000000)
                     {
                         // quit nox
-                        Quit_Nox(nox_clonename);
+                        Quit_Nox(nox_id);
 
                         // stop worker1
                         Bot.worker1.CancelAsync();
@@ -179,6 +179,8 @@ namespace QMapleBot
                             status.Text = "Off";
                             status.ForeColor = Color.Crimson;
                         });
+
+                        break;
                     }
                 }
             }
@@ -241,10 +243,10 @@ namespace QMapleBot
                 {
                     for (int i = 0; i < 12; i++)
                     {
-                        string nox_clonename = "Nox_" + i;
-                        if (!nox_list.Contains(nox_clonename))
+                        string checknox_clonename = "Nox_" + i;
+                        if (!nox_list.Contains(checknox_clonename))
                         {
-                            Run_Emu(nox_clonename);
+                            Run_Emu(checknox_clonename);
                             break;
                         }
                     }
@@ -265,9 +267,15 @@ namespace QMapleBot
                 if (!checkHwnd)
                 {
                     GetHandleNox();
+                }
+
+                // check ram
+                if (checkHwnd)
+                {
                     CheckNoxRam();
                 }
                 
+
 
                 // check if no nox -> cancel all job
                 if (checkHwnd)
@@ -507,12 +515,12 @@ namespace QMapleBot
                     Thread.Sleep(1000);
                 }
 
-                bool checkGameDis7 = Tool.PixelSearch(270, 220, 0xF8B733, ss2);
-                bool checkGameDis8 = Tool.PixelSearch(129, 199, 0x53C4F7, ss2);
-                bool checkGameDis9 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss2);
-                if (checkGameDis7 && checkGameDis8 && checkGameDis9)
+                bool checkOpenMaple1 = Tool.PixelSearch(270, 220, 0xF8B733, ss2);
+                bool checkOpenMaple2 = Tool.PixelSearch(129, 199, 0x53C4F7, ss2);
+                bool checkOpenMaple3 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss2);
+                if (checkOpenMaple1 && checkOpenMaple2 && checkOpenMaple3)
                 {
-                    Tool.Mouse_Click(531, 330);   // close nox tutorial 2
+                    Tool.Mouse_Click(531, 330);   // close click maple
                     Thread.Sleep(1000);
                 }
 
