@@ -43,11 +43,6 @@ namespace QMapleBot
         {
             // stop worker1
             Bot.worker1.CancelAsync();
-            //Bot.pause_bot.Reset();
-
-            button2.Enabled = false;
-            button1.Enabled = true;
-
 
             // stop worker3
             Bot.worker3.CancelAsync();
@@ -60,14 +55,13 @@ namespace QMapleBot
             // change color of bot status
             label4.Text = "Off";
             label4.ForeColor = Color.Crimson;
+
+            button2.Enabled = false;
+            button1.Enabled = true;
         }
 
         private void form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Bot.worker1.Dispose();
-            Bot.worker2.Dispose();
-            Bot.worker3.Dispose();
-            Bot.worker4.Dispose();
             Tool.RevertWindowTitle();
         }
 

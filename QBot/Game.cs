@@ -304,6 +304,32 @@ namespace QMapleBot
             }
         }
 
+        // auto equip potion when empty
+        public static void Do_EquipPotion(Bitmap ss)
+        {
+            // equip hp potion
+            bool equipHp1 = Tool.PixelSearch(716, 433, 0xECECEC, ss);
+            bool equipHp2 = Tool.PixelSearch(720, 433, 0xF1F1F1, ss);
+            bool equipHp3 = Tool.PixelSearch(725, 431, 0xEEEEEE, ss);
+            if (equipHp1 && equipHp2 && equipHp3)
+            {
+                Tool.Mouse_Click(718, 418);
+                Thread.Sleep(50);
+            }
+
+            // equip mp potion
+            bool equipMp1 = Tool.PixelSearch(765, 431, 0xF7F6F6, ss);
+            bool equipMp2 = Tool.PixelSearch(767, 435, 0xECECEC, ss);
+            bool equipMp3 = Tool.PixelSearch(776, 432, 0xDEDEDE, ss);
+            if (equipMp1 && equipMp2 && equipMp3)
+            {
+                Tool.Mouse_Click(769, 422);
+                Thread.Sleep(50);
+            }
+
+            // dont know why but somecode do the work after open potion panel
+        }
+
         // detect stuck lv3-20
         public static void Do_DetectStuck(Bitmap ss)
         {

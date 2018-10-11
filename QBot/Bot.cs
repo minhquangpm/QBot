@@ -38,6 +38,7 @@ namespace QMapleBot
         //public static int emulator;
         private static bool checkHwnd = false;
         private static int pid;
+        private static string nox_clonename = "";
 
         // init worker
         public static BackgroundWorker worker1 = null;
@@ -51,6 +52,7 @@ namespace QMapleBot
 
         // checkbox
         public static bool checkTele = false;
+        //public static bool checkTut = false;
 
         // init label status (from Form1)
         public static Label status;
@@ -117,9 +119,69 @@ namespace QMapleBot
                 start_info.FileName = @"D:\Program Files\Nox\bin\Nox.exe";
             }
 
-            start_info.Arguments = "-clone:" + emu_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1200 -performance:middle";
+            start_info.Arguments = "-clone:" + emu_id + " -title:NoxPlayer -resolution:800x600 -dpi:160 -cpu:1 -memory:1024 -performance:low";
             Process.Start(start_info);
+        }
 
+        private static void Quit_Nox(string nox_id)
+        {
+            var quit_info = new ProcessStartInfo();
+            if (File.Exists(@"C:\Program Files (x86)\Nox\bin\Nox.exe"))
+            {
+                quit_info.FileName = @"C:\Program Files (x86)\Nox\bin\Nox.exe";
+            }
+            else if (File.Exists(@"D:\Program Files\Nox\bin\Nox.exe"))
+            {
+                quit_info.FileName = @"D:\Program Files\Nox\bin\Nox.exe";
+            }
+
+            quit_info.Arguments = "-clone:" + nox_id + " -quit";
+            Process.Start(quit_info);
+        }
+
+        private static void CheckNoxRam()
+        {
+            Process[] noxVM_list = Process.GetProcessesByName("NoxVMHandle");
+
+            foreach (Process noxVM in noxVM_list)
+            {
+                string nox_cmd = GetCommandLine(noxVM);
+                string nox_id = nox_cmd.Split(new string[] { "--" }, StringSplitOptions.None)[1].Split(' ')[1].Trim();
+                if (nox_id.Equals("nox"))
+                {
+                    nox_id = "Nox_0";
+                }
+
+                if (nox_id.Equals(nox_clonename))
+                {
+                    long noxVM_ram = noxVM.WorkingSet64;
+                    if (noxVM_ram > 700000000)
+                    {
+                        // quit nox
+                        Quit_Nox(nox_clonename);
+
+                        // stop worker1
+                        Bot.worker1.CancelAsync();
+
+                        // stop worker3
+                        Bot.worker3.CancelAsync();
+
+                        // start worker4
+                        Bot.worker4.RunWorkerAsync();
+
+
+                        //
+                        checkHwnd = false;
+
+                        // change color of nox status
+                        status.Invoke((Action)delegate
+                        {
+                            status.Text = "Off";
+                            status.ForeColor = Color.Crimson;
+                        });
+                    }
+                }
+            }
         }
 
         private static void GetHandleNox()
@@ -140,7 +202,7 @@ namespace QMapleBot
                         // change nox title
                         string nox_commandline = nox.GetCommandLine();
                         string nox_clone = nox_commandline.Split('-')[1];
-                        string nox_clonename = nox_clone.Split(':')[1];
+                        nox_clonename = nox_clone.Split(':')[1].Trim();
 
                         Win32.SetWindowText(hwnd, nox_clonename);
 
@@ -203,6 +265,7 @@ namespace QMapleBot
                 if (!checkHwnd)
                 {
                     GetHandleNox();
+                    CheckNoxRam();
                 }
                 
 
@@ -274,7 +337,10 @@ namespace QMapleBot
                     Game.Do_CheckLevel(ss);
                     Game.Do_CheckAlive(ss);
 
+                    Game.Do_EquipPotion(ss);
+
                     Event.Do_Event(ss);
+
 
                     Tutorial.Do_Tutorial(ss);
                     Tutorial.Tut_Pet(ss);
@@ -284,10 +350,11 @@ namespace QMapleBot
                     Tutorial.Tut_Jewel(ss);
                     Tutorial.Tut_Dungeon(ss);
                     Tutorial.Tut_Auto(ss);
+                    
 
-                    Thread.Sleep(1000);
 
                     // release resource
+                    Thread.Sleep(1000);
                     ss.Dispose();
                     Application.DoEvents();
                 }
