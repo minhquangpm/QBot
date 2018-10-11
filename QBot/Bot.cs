@@ -45,10 +45,11 @@ namespace QMapleBot
         public static BackgroundWorker worker2 = null;
         public static BackgroundWorker worker3 = null;
         public static BackgroundWorker worker4 = null;
+        public static BackgroundWorker worker5 = null;
 
         // init ss
         public static Bitmap ss = null;
-        private static Bitmap ss2 = null;
+        //private static Bitmap ss = null;
 
         // checkbox
         public static bool checkTele = false;
@@ -89,11 +90,17 @@ namespace QMapleBot
                 WorkerSupportsCancellation = true
             };
 
+            worker5 = new BackgroundWorker
+            {
+                WorkerSupportsCancellation = true
+            };
+
             // add work
             worker1.DoWork += Worker_RunBot;
             worker2.DoWork += Worker_GetHandle;
             worker3.DoWork += Worker_SwitchChar;
             worker4.DoWork += Worker_Relogin;
+            worker4.DoWork += Worker_CheckNoxRam;
 
             // get handle and set nox title
             worker2.RunWorkerAsync();
@@ -228,6 +235,9 @@ namespace QMapleBot
                         // save status nox exist
                         check_nox = true;
 
+                        // turn worker5 on
+                        worker5.RunWorkerAsync();
+                        
 
                         break;
                     }
@@ -247,6 +257,10 @@ namespace QMapleBot
                         if (!nox_list.Contains(checknox_clonename))
                         {
                             Run_Emu(checknox_clonename);
+
+                            // run worker4 for auto login
+                            worker4.RunWorkerAsync();
+
                             break;
                         }
                     }
@@ -256,6 +270,32 @@ namespace QMapleBot
             {
                 // run first nox
                 Run_Emu("Nox_0");
+
+                // run worker4 for auto login
+                worker4.RunWorkerAsync();
+            }
+        }
+
+        private static void Worker_CheckNoxRam(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                if (worker5.CancellationPending)
+                {
+                    // cancel worker when press Stop
+                    e.Cancel = true;
+                    return;
+                }
+
+                // check ram
+                if (checkHwnd)
+                {
+                    CheckNoxRam();
+                }
+
+                // give the bot some breathes
+                Application.DoEvents();
+                Thread.Sleep(60000);
             }
         }
 
@@ -269,14 +309,6 @@ namespace QMapleBot
                     GetHandleNox();
                 }
 
-                // check ram
-                if (checkHwnd)
-                {
-                    CheckNoxRam();
-                }
-                
-
-
                 // check if no nox -> cancel all job
                 if (checkHwnd)
                 {
@@ -285,6 +317,9 @@ namespace QMapleBot
                         checkHwnd = false;
                         hwnd = IntPtr.Zero;
                         worker1.CancelAsync();
+                        worker3.CancelAsync();
+                        worker4.CancelAsync();
+                        worker5.CancelAsync();
 
                         // change color of nox status
                         status.Invoke((Action)delegate
@@ -495,38 +530,38 @@ namespace QMapleBot
                 * the game crash and somehow nox's tutorial pop up,
                 * we check the tutorial pixel to see if nox is crash.
                 */
-                ss2 = Tool.PrintWindow(hwnd);
+                ss = Tool.PrintWindow(hwnd);
 
-                bool checkGameDis1 = Tool.PixelSearch(410, 163, 0xFFFFFF, ss2);
-                bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss2);
-                bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss2);
+                bool checkGameDis1 = Tool.PixelSearch(410, 163, 0xFFFFFF, ss);
+                bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss);
+                bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss);
                 if (checkGameDis1 && checkGameDis2 && checkGameDis3)
                 {
                     Tool.Mouse_Click(397, 52);   // close nox tutorial 
                     Thread.Sleep(1000);
                 }
 
-                bool checkGameDis4 = Tool.PixelSearch(12, 37, 0x54005D, ss2);
-                bool checkGameDis5 = Tool.PixelSearch(309, 514, 0x165437, ss2);
-                bool checkGameDis6 = Tool.PixelSearch(315, 341, 0xFFFFFF, ss2);
+                bool checkGameDis4 = Tool.PixelSearch(12, 37, 0x54005D, ss);
+                bool checkGameDis5 = Tool.PixelSearch(309, 514, 0x165437, ss);
+                bool checkGameDis6 = Tool.PixelSearch(315, 341, 0xFFFFFF, ss);
                 if (checkGameDis4 && checkGameDis5 && checkGameDis6)
                 {
                     Tool.Mouse_Click(401, 400);   // close nox tutorial 2
                     Thread.Sleep(1000);
                 }
 
-                bool checkOpenMaple1 = Tool.PixelSearch(270, 220, 0xF8B733, ss2);
-                bool checkOpenMaple2 = Tool.PixelSearch(129, 199, 0x53C4F7, ss2);
-                bool checkOpenMaple3 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss2);
+                bool checkOpenMaple1 = Tool.PixelSearch(270, 220, 0xF8B733, ss);
+                bool checkOpenMaple2 = Tool.PixelSearch(129, 199, 0x53C4F7, ss);
+                bool checkOpenMaple3 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss);
                 if (checkOpenMaple1 && checkOpenMaple2 && checkOpenMaple3)
                 {
                     Tool.Mouse_Click(531, 330);   // close click maple
                     Thread.Sleep(1000);
                 }
 
-                bool checkGameDis10 = Tool.PixelSearch(34, 42, 0x232C2C, ss2);
-                bool checkGameDis11 = Tool.PixelSearch(778, 42, 0x111616, ss2);
-                bool checkGameDis12 = Tool.PixelSearch(776, 55, 0xFFFFFF, ss2);
+                bool checkGameDis10 = Tool.PixelSearch(34, 42, 0x232C2C, ss);
+                bool checkGameDis11 = Tool.PixelSearch(778, 42, 0x111616, ss);
+                bool checkGameDis12 = Tool.PixelSearch(776, 55, 0xFFFFFF, ss);
                 if (checkGameDis10 && checkGameDis11 && checkGameDis12)
                 {
                     Tool.Mouse_Click(776, 55);   // close maple notice
@@ -534,9 +569,9 @@ namespace QMapleBot
                 }
 
                 // maple start screen
-                bool checkGameDis13 = Tool.PixelSearch(28, 168, 0xA1BA5F, ss2);
-                bool checkGameDis14 = Tool.PixelSearch(548, 228, 0xF5791F, ss2);
-                bool checkGameDis15 = Tool.PixelSearch(535, 338, 0xB68D53, ss2);
+                bool checkGameDis13 = Tool.PixelSearch(28, 168, 0xA1BA5F, ss);
+                bool checkGameDis14 = Tool.PixelSearch(548, 228, 0xF5791F, ss);
+                bool checkGameDis15 = Tool.PixelSearch(535, 338, 0xB68D53, ss);
                 if (checkGameDis13 && checkGameDis14 && checkGameDis15)
                 {
                     Tool.Mouse_Click(390, 479);   // press here to start
@@ -544,9 +579,9 @@ namespace QMapleBot
                 }
 
                 // select current server to login
-                bool checkGameDis16 = Tool.PixelSearch(208, 136, 0x515F6E, ss2);
-                bool checkGameDis17 = Tool.PixelSearch(22, 524, 0xE8BB00, ss2);
-                bool checkGameDis18 = Tool.PixelSearch(401, 188, 0xF2F2F2, ss2);
+                bool checkGameDis16 = Tool.PixelSearch(208, 136, 0x515F6E, ss);
+                bool checkGameDis17 = Tool.PixelSearch(22, 524, 0xE8BB00, ss);
+                bool checkGameDis18 = Tool.PixelSearch(401, 188, 0xF2F2F2, ss);
                 if (checkGameDis16 && checkGameDis17 && checkGameDis18)
                 {
                     Tool.Mouse_Click(368, 246);   // press current server
@@ -554,10 +589,10 @@ namespace QMapleBot
                 }
 
                 // close attendance pop up
-                bool checkPopup1 = Tool.PixelSearch(17, 122, 0xFFFFFF, ss2);
-                bool checkPopup2 = Tool.PixelSearch(497, 129, 0x515F6E, ss2);
-                bool checkPopup3 = Tool.PixelSearch(711, 172, 0x548FBA, ss2);
-                bool checkPopup4 = Tool.PixelSearch(779, 131, 0xFFFFFF, ss2);
+                bool checkPopup1 = Tool.PixelSearch(17, 122, 0xFFFFFF, ss);
+                bool checkPopup2 = Tool.PixelSearch(497, 129, 0x515F6E, ss);
+                bool checkPopup3 = Tool.PixelSearch(711, 172, 0x548FBA, ss);
+                bool checkPopup4 = Tool.PixelSearch(779, 131, 0xFFFFFF, ss);
                 if (checkPopup1 && checkPopup2 && checkPopup3 && checkPopup4)
                 {
                     Tool.Mouse_Click(779, 131); // close pop up
@@ -565,28 +600,28 @@ namespace QMapleBot
                 }
 
                 // press start for current character
-                bool checkGameDis19 = Tool.PixelSearch(35, 329, 0xFF7B52, ss2);
-                bool checkGameDis20 = Tool.PixelSearch(605, 482, 0x9BBC17, ss2);
-                bool checkGameDis21 = Tool.PixelSearch(537, 329, 0xFF7B52, ss2);
+                bool checkGameDis19 = Tool.PixelSearch(35, 329, 0xFF7B52, ss);
+                bool checkGameDis20 = Tool.PixelSearch(605, 482, 0x9BBC17, ss);
+                bool checkGameDis21 = Tool.PixelSearch(537, 329, 0xFF7B52, ss);
                 if (checkGameDis19 && checkGameDis20 && checkGameDis21)
                 {
                     Tool.Mouse_Click(654, 487);   // press here to start
                     Thread.Sleep(1000);
                 }
 
-                bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss2);       // check hp
-                bool checkMp = Tool.PixelSearch(15, 77, 0x0096FF, ss2);       // check mp
+                bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss);       // check hp
+                bool checkMp = Tool.PixelSearch(15, 77, 0x0096FF, ss);       // check mp
 
-                bool checkRevive1 = Tool.PixelSearch(188, 429, 0x548FBA, ss2);
-                bool checkRevive2 = Tool.PixelSearch(459, 419, 0x59B0A8, ss2);
-                bool checkRevive3 = Tool.PixelSearch(537, 420, 0xFF7B50, ss2);
+                bool checkRevive1 = Tool.PixelSearch(188, 429, 0x548FBA, ss);
+                bool checkRevive2 = Tool.PixelSearch(459, 419, 0x59B0A8, ss);
+                bool checkRevive3 = Tool.PixelSearch(537, 420, 0xFF7B50, ss);
                 if ((checkHp && checkMp) || (checkRevive1 && checkRevive2 && checkRevive3))
                 {
                     // start worker1
                     worker1.RunWorkerAsync();
 
                     // release resource
-                    ss2.Dispose();
+                    ss.Dispose();
                     Thread.Sleep(1000);
 
                     // stop this worker
@@ -595,7 +630,7 @@ namespace QMapleBot
 
 
                 // release resource
-                ss2.Dispose();
+                ss.Dispose();
                 Thread.Sleep(1000);
                 Application.DoEvents();
             }
