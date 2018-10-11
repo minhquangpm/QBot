@@ -13,6 +13,16 @@ namespace QMapleBot
         // event ingame
         public static void Do_Event(Bitmap ss)
         {
+            // event return cygnus
+            bool checkReturn1 = Tool.PixelSearch(86, 139, 0x515F6E, ss);
+            bool checkReturn2 = Tool.PixelSearch(92, 194, 0x23AFFF, ss);
+            bool checkReturn3 = Tool.PixelSearch(716, 142, 0xFFFFFF, ss);
+            if (checkReturn1 && checkReturn2 && checkReturn3)
+            {
+                Tool.Mouse_Click(716, 142);   // close event banner
+                Thread.Sleep(50);
+            }
+
             // event golden apple
             bool checkEventGA1 = Tool.PixelSearch(114, 148, 0xF47920, ss); // M icon left corner
             bool checkEventGA2 = Tool.PixelSearch(242, 389, 0xEAB20A, ss); // golden apple
