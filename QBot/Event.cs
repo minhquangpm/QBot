@@ -33,11 +33,21 @@ namespace QMapleBot
                 Thread.Sleep(50);
             }
 
-            // event royal style
+            // event royal style doctor
             bool checkRoyalStyle1 = Tool.PixelSearch(114, 148, 0xF47920, ss); // M icon left corner
-            bool checkRoyalStyle2 = Tool.PixelSearch(382, 160, 0x6D3E02, ss);
-            bool checkRoyalStyle3 = Tool.PixelSearch(693, 148, 0x5A4427, ss); // x icon            
+            bool checkRoyalStyle2 = Tool.PixelSearch(513, 512, 0xFFD200, ss); // package shop
+            bool checkRoyalStyle3 = Tool.PixelSearch(693, 148, 0x879BB1, ss); // x icon            
             if (checkRoyalStyle1 && checkRoyalStyle2 && checkRoyalStyle3)
+            {
+                Tool.Mouse_Click(693, 148);   // close event banner
+                Thread.Sleep(50);
+            }
+
+            // event buff pet
+            bool checkBuffPet1 = Tool.PixelSearch(114, 148, 0xF47920, ss); // M icon left corner
+            bool checkBuffPet2 = Tool.PixelSearch(513, 512, 0xFFD200, ss); // shop
+            bool checkBuffPet3 = Tool.PixelSearch(693, 148, 0xBBBEC4, ss); // x icon            
+            if (checkBuffPet1 && checkBuffPet2 && checkBuffPet3)
             {
                 Tool.Mouse_Click(693, 148);   // close event banner
                 Thread.Sleep(50);
