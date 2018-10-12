@@ -36,7 +36,8 @@ namespace QMapleBot
             // event royal style
             bool checkRoyalStyle1 = Tool.PixelSearch(114, 148, 0xF47920, ss); // M icon left corner
             bool checkRoyalStyle2 = Tool.PixelSearch(382, 160, 0x6D3E02, ss);
-            bool checkRoyalStyle3 = Tool.PixelSearch(693, 148, 0x5A4427, ss); // x icon            if (checkRoyalStyle1 && checkRoyalStyle2 && checkRoyalStyle3)
+            bool checkRoyalStyle3 = Tool.PixelSearch(693, 148, 0x5A4427, ss); // x icon            
+            if (checkRoyalStyle1 && checkRoyalStyle2 && checkRoyalStyle3)
             {
                 Tool.Mouse_Click(693, 148);   // close event banner
                 Thread.Sleep(50);
