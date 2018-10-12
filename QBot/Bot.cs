@@ -45,7 +45,7 @@ namespace QMapleBot
         public static BackgroundWorker worker2 = null;
         public static BackgroundWorker worker3 = null;
         public static BackgroundWorker worker4 = null;
-        public static BackgroundWorker worker5 = null;
+        //public static BackgroundWorker worker5 = null;
 
         // init ss
         public static Bitmap ss = null;
@@ -90,17 +90,17 @@ namespace QMapleBot
                 WorkerSupportsCancellation = true
             };
 
-            worker5 = new BackgroundWorker
-            {
-                WorkerSupportsCancellation = true
-            };
+            //worker5 = new BackgroundWorker
+            //{
+            //    WorkerSupportsCancellation = true
+            //};
 
             // add work
             worker1.DoWork += Worker_RunBot;
             worker2.DoWork += Worker_GetHandle;
             worker3.DoWork += Worker_SwitchChar;
             worker4.DoWork += Worker_Relogin;
-            worker4.DoWork += Worker_CheckNoxRam;
+            //worker5.DoWork += Worker_CheckNoxRam;
 
             // get handle and set nox title
             worker2.RunWorkerAsync();
@@ -146,52 +146,52 @@ namespace QMapleBot
             Process.Start(quit_info);
         }
 
-        private static void CheckNoxRam()
-        {
-            Process[] noxVM_list = Process.GetProcessesByName("NoxVMHandle");
+        //private static void CheckNoxRam()
+        //{
+        //    Process[] noxVM_list = Process.GetProcessesByName("NoxVMHandle");
 
-            foreach (Process noxVM in noxVM_list)
-            {
-                string nox_cmd = GetCommandLine(noxVM);
-                string nox_id = nox_cmd.Split(new string[] { "--" }, StringSplitOptions.None)[1].Split(' ')[1].Trim();
-                if (nox_id.Equals("nox"))
-                {
-                    nox_id = "Nox_0";
-                }
+        //    foreach (Process noxVM in noxVM_list)
+        //    {
+        //        string nox_cmd = GetCommandLine(noxVM);
+        //        string nox_id = nox_cmd.Split(new string[] { "--" }, StringSplitOptions.None)[1].Split(' ')[1].Trim();
+        //        if (nox_id.Equals("nox"))
+        //        {
+        //            nox_id = "Nox_0";
+        //        }
 
-                if (nox_id.Equals(nox_clonename))
-                {
-                    long noxVM_ram = noxVM.WorkingSet64;
-                    if (noxVM_ram > 700000000)
-                    {
-                        // quit nox
-                        Quit_Nox(nox_id);
+        //        if (nox_id.Equals(nox_clonename))
+        //        {
+        //            long noxVM_ram = noxVM.WorkingSet64;
+        //            if (noxVM_ram > 700000000)
+        //            {
+        //                // quit nox
+        //                Quit_Nox(nox_id);
 
-                        // stop worker1
-                        Bot.worker1.CancelAsync();
+        //                // stop worker1
+        //                Bot.worker1.CancelAsync();
 
-                        // stop worker3
-                        Bot.worker3.CancelAsync();
+        //                // stop worker3
+        //                Bot.worker3.CancelAsync();
 
-                        // start worker4
-                        Bot.worker4.RunWorkerAsync();
+        //                // start worker4
+        //                Bot.worker4.RunWorkerAsync();
 
 
-                        //
-                        checkHwnd = false;
+        //                //
+        //                checkHwnd = false;
 
-                        // change color of nox status
-                        status.Invoke((Action)delegate
-                        {
-                            status.Text = "Off";
-                            status.ForeColor = Color.Crimson;
-                        });
+        //                // change color of nox status
+        //                status.Invoke((Action)delegate
+        //                {
+        //                    status.Text = "Off";
+        //                    status.ForeColor = Color.Crimson;
+        //                });
 
-                        break;
-                    }
-                }
-            }
-        }
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
 
         private static void GetHandleNox()
         {
@@ -236,7 +236,7 @@ namespace QMapleBot
                         check_nox = true;
 
                         // turn worker5 on
-                        worker5.RunWorkerAsync();
+                        //worker5.RunWorkerAsync();
                         
 
                         break;
@@ -259,7 +259,7 @@ namespace QMapleBot
                             Run_Emu(checknox_clonename);
 
                             // run worker4 for auto login
-                            worker4.RunWorkerAsync();
+                            //worker4.RunWorkerAsync();
 
                             break;
                         }
@@ -272,32 +272,32 @@ namespace QMapleBot
                 Run_Emu("Nox_0");
 
                 // run worker4 for auto login
-                worker4.RunWorkerAsync();
+                //worker4.RunWorkerAsync();
             }
         }
 
-        private static void Worker_CheckNoxRam(object sender, DoWorkEventArgs e)
-        {
-            while (true)
-            {
-                if (worker5.CancellationPending)
-                {
-                    // cancel worker when press Stop
-                    e.Cancel = true;
-                    return;
-                }
+        //private static void Worker_CheckNoxRam(object sender, DoWorkEventArgs e)
+        //{
+        //    while (true)
+        //    {
+        //        if (worker5.CancellationPending)
+        //        {
+        //            // cancel worker when press Stop
+        //            e.Cancel = true;
+        //            return;
+        //        }
 
-                // check ram
-                if (checkHwnd)
-                {
-                    CheckNoxRam();
-                }
+        //        // check ram
+        //        if (checkHwnd)
+        //        {
+        //            CheckNoxRam();
+        //        }
 
-                // give the bot some breathes
-                Application.DoEvents();
-                Thread.Sleep(60000);
-            }
-        }
+        //        // give the bot some breathes
+        //        Application.DoEvents();
+        //        Thread.Sleep(60000);
+        //    }
+        //}
 
         // worker waiting to handle nox
         private static void Worker_GetHandle(object sender, DoWorkEventArgs e)
@@ -319,7 +319,7 @@ namespace QMapleBot
                         worker1.CancelAsync();
                         worker3.CancelAsync();
                         worker4.CancelAsync();
-                        worker5.CancelAsync();
+                        //worker5.CancelAsync();
 
                         // change color of nox status
                         status.Invoke((Action)delegate
