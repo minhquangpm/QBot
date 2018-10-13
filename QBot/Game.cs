@@ -447,10 +447,16 @@ namespace QMapleBot
              * the game crash and somehow nox's tutorial pop up,
              * we check the tutorial pixel to see if nox is crash.
              */
-            bool checkGameDis1 = Tool.PixelSearch(12, 37, 0xD200E9, ss);
-            bool checkGameDis2 = Tool.PixelSearch(291, 514, 0x37D38A, ss);
+            bool checkGameDis1 = Tool.PixelSearch(410, 163, 0xFFFFFF, ss);
+            bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss);
             bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss);
-            if (checkGameDis1 && checkGameDis2 && checkGameDis3)
+
+            bool checkOpenMaple1 = Tool.PixelSearch(270, 220, 0xF8B733, ss);
+            bool checkOpenMaple2 = Tool.PixelSearch(129, 199, 0x53C4F7, ss);
+            bool checkOpenMaple3 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss);
+
+            if ((checkGameDis1 && checkGameDis2 && checkGameDis3) ||
+               (checkOpenMaple1 && checkOpenMaple2 && checkOpenMaple3))
             {
                 //string error_msg = Bot.name.Text + ": Maple has stop working";
                 //Tool.SendGmail(Bot.name.Text, error_msg);
