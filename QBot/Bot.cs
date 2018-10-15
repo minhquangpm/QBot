@@ -393,7 +393,7 @@ namespace QMapleBot
                     Tutorial.Tut_Jewel(ss);
                     Tutorial.Tut_Dungeon(ss);
                     Tutorial.Tut_Auto(ss);
-                    
+
 
 
                     // release resource
@@ -538,7 +538,7 @@ namespace QMapleBot
                 if (checkGameDis1 && checkGameDis2 && checkGameDis3)
                 {
                     Tool.Mouse_Click(397, 52);   // close nox tutorial 
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                 }
 
                 bool checkGameDis4 = Tool.PixelSearch(12, 37, 0x54005D, ss);
@@ -547,7 +547,7 @@ namespace QMapleBot
                 if (checkGameDis4 && checkGameDis5 && checkGameDis6)
                 {
                     Tool.Mouse_Click(401, 400);   // close nox tutorial 2
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                 }
 
                 bool checkOpenMaple1 = Tool.PixelSearch(270, 220, 0xF8B733, ss);
@@ -556,7 +556,7 @@ namespace QMapleBot
                 if (checkOpenMaple1 && checkOpenMaple2 && checkOpenMaple3)
                 {
                     Tool.Mouse_Click(531, 330);   // close click maple
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                 }
 
                 bool checkGameDis10 = Tool.PixelSearch(34, 42, 0x232C2C, ss);
@@ -565,7 +565,7 @@ namespace QMapleBot
                 if (checkGameDis10 && checkGameDis11 && checkGameDis12)
                 {
                     Tool.Mouse_Click(776, 55);   // close maple notice
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                 }
 
                 // maple start screen
@@ -575,7 +575,7 @@ namespace QMapleBot
                 if (checkGameDis13 && checkGameDis14 && checkGameDis15)
                 {
                     Tool.Mouse_Click(390, 479);   // press here to start
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                 }
 
                 // select current server to login
@@ -585,7 +585,7 @@ namespace QMapleBot
                 if (checkGameDis16 && checkGameDis17 && checkGameDis18)
                 {
                     Tool.Mouse_Click(368, 246);   // press current server
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                 }
 
                 // close attendance pop up
@@ -596,7 +596,7 @@ namespace QMapleBot
                 if (checkPopup1 && checkPopup2 && checkPopup3 && checkPopup4)
                 {
                     Tool.Mouse_Click(779, 131); // close pop up
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                 }
 
                 // press start for current character
@@ -606,7 +606,7 @@ namespace QMapleBot
                 if (checkGameDis19 && checkGameDis20 && checkGameDis21)
                 {
                     Tool.Mouse_Click(654, 487);   // press here to start
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
                 }
 
                 bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss);       // check hp
@@ -622,7 +622,7 @@ namespace QMapleBot
 
                     // release resource
                     ss.Dispose();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
 
                     // stop this worker
                     worker4.CancelAsync();

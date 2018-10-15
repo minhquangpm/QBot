@@ -44,7 +44,8 @@ namespace QMapleBot
             // choose pet
             bool checkChoosePet1 = Tool.PixelSearch(458, 233, 0xFBFBF9, ss);
             bool checkChoosePet2 = Tool.PixelSearch(528, 250, 0xFBFBF9, ss);
-            if (checkChoosePet1 && checkChoosePet2)
+            bool checkChoosePet3 = Tool.PixelSearch(552, 211, 0x548FBA, ss);
+            if (checkChoosePet1 && checkChoosePet2 && !checkChoosePet3)
             {
                 Tool.Mouse_Click(488, 240);   // click choose pet
                 Thread.Sleep(50);

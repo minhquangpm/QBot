@@ -5,6 +5,8 @@
 
 # User-specific files
 *.suo
+
+.vs/QBot/v15/.suo
 *.user
 *.sln.docstates
 
@@ -65,6 +67,7 @@ ipch/
 *.opensdf
 *.sdf
 *.cachefile
+*.cache
 
 # Visual Studio profiler
 *.psess
@@ -218,3 +221,5 @@ project.lock.json
 #####
 .vs/QBot/v15/.suo
 QBot/obj/Debug/QBot.csproj.CoreCompileInputs.cache
+*.cache
+.vs/QBot/v15/.suo

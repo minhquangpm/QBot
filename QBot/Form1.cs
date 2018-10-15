@@ -47,6 +47,9 @@ namespace QMapleBot
             // stop worker3
             Bot.worker3.CancelAsync();
 
+            // stop worker4
+            Bot.worker4.CancelAsync();
+
             // stop tele
             Bot.checkTele = false;
             checkBox2.Checked = false;

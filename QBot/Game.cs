@@ -8,6 +8,11 @@ namespace QMapleBot
         // init ss2
         private static Bitmap ss2 = null;
 
+        // check pot
+        private static bool hpPot = true;
+        private static bool mpPot = true;
+
+
         // run quest
         public static void Do_Quest(Bitmap ss)
         {
@@ -315,6 +320,7 @@ namespace QMapleBot
             if (equipHp1 && equipHp2 && equipHp3)
             {
                 Tool.Mouse_Click(718, 418);
+                hpPot = false;
                 Thread.Sleep(50);
             }
 
@@ -325,10 +331,30 @@ namespace QMapleBot
             if (equipMp1 && equipMp2 && equipMp3)
             {
                 Tool.Mouse_Click(769, 422);
+                mpPot = false;
                 Thread.Sleep(50);
             }
 
-            // dont know why but somecode do the work after open potion panel
+            //// equip pot or buy
+            //bool checkPot1 = Tool.PixelSearch(496, 211, 0x548FBA, ss);
+            //bool checkPot2 = Tool.PixelSearch(510, 139, 0x515F6E, ss);
+            //bool checkPot3 = Tool.PixelSearch(570, 143, 0xFFFFFF, ss);
+            //bool checkPot4 = Tool.PixelSearch(464, 508, 0xFF7B50, ss);
+            //if (checkPot1 && checkPot2 && checkPot3)
+            //{
+            //    Tool.Mouse_Click(536, 220);
+            //    Thread.Sleep(50);
+            //}
+            //else if (checkPot2 && checkPot3 && checkPot4)
+            //{
+            //    Tool.Mouse_Click(399, 499);
+            //    Thread.Sleep(50);
+            //}
+
+            //bool buyPot1 = Tool.PixelSearch(16, 177, 0xFF7B50, ss);
+            //bool buyPot2 = Tool.PixelSearch(510, 139, 0x515F6E, ss);
+            //bool buyPot3 = Tool.PixelSearch(778, 130, 0xFFFFFF, ss);
+
         }
 
         // detect stuck lv3-20
