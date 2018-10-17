@@ -209,7 +209,8 @@ namespace QMapleBot
             // Jewel icon
             bool checkJewelIcon1 = Tool.PixelSearch(380, 168, 0xFF6B39, ss); // the arrow
             bool checkJewelIcon2 = Tool.PixelSearch(377, 130, 0xFFFFFF, ss); // the jewel icon
-            if (checkJewelIcon1 && checkJewelIcon2)
+            bool checkJewelIcon3 = Tool.PixelSearch(377, 130, 0x808080, ss); // the jewel icon
+            if ((checkJewelIcon1 && checkJewelIcon2) || (checkJewelIcon1 && checkJewelIcon3))
             {
                 Tool.Mouse_Click(381, 131);   // click jewel icon tut
                 Thread.Sleep(50);
