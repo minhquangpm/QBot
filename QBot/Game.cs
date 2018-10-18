@@ -505,9 +505,6 @@ namespace QMapleBot
                 {
                     Bot.worker4.RunWorkerAsync();
                 }
-
-                // pause bot
-                Bot.worker1.CancelAsync();
             }
         }
     }
