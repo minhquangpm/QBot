@@ -349,15 +349,15 @@ namespace QMapleBot
             }
 
             //// equip pot or buy
-            //bool checkPot1 = Tool.PixelSearch(496, 211, 0x548FBA, ss);
-            //bool checkPot2 = Tool.PixelSearch(510, 139, 0x515F6E, ss);
-            //bool checkPot3 = Tool.PixelSearch(570, 143, 0xFFFFFF, ss);
+            bool checkPot1 = Tool.PixelSearch(496, 211, 0x548FBA, ss);
+            bool checkPot2 = Tool.PixelSearch(510, 139, 0x515F6E, ss);
+            bool checkPot3 = Tool.PixelSearch(570, 143, 0xFFFFFF, ss);
             //bool checkPot4 = Tool.PixelSearch(464, 508, 0xFF7B50, ss);
-            //if (checkPot1 && checkPot2 && checkPot3)
-            //{
-            //    Tool.Mouse_Click(536, 220);
-            //    Thread.Sleep(50);
-            //}
+            if (checkPot1 && checkPot2 && checkPot3)
+            {
+                Tool.Mouse_Click(536, 220);
+                Thread.Sleep(50);
+            }
             //else if (checkPot2 && checkPot3 && checkPot4)
             //{
             //    Tool.Mouse_Click(399, 499);
