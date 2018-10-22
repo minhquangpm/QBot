@@ -320,6 +320,16 @@ namespace QMapleBot
                 Tool.Mouse_Click(638, 332);   // close mail 
                 Thread.Sleep(50);
             }
+
+            // fever pop up
+            bool checkFever1 = Tool.PixelSearch(524, 182, 0x515F6E, ss);   
+            bool checkFever2 = Tool.PixelSearch(617, 183, 0xFFFFFF, ss);      // x
+            bool checkFever3 = Tool.PixelSearch(453, 440, 0xFF7B50, ss);      // purchase
+            if (checkFever1 && checkFever2 && checkFever3)
+            {
+                Tool.Mouse_Click(617, 183);   // close mail 
+                Thread.Sleep(50);
+            }
         }
 
         // auto equip potion when empty
