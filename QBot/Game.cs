@@ -310,13 +310,12 @@ namespace QMapleBot
             }
 
             // close menu
-            bool checkMenu1 = Tool.PixelSearch(113, 55, 0xFFFFFF, ss);
-            bool checkMenu2 = Tool.PixelSearch(345, 53, 0xFFFFFF, ss);
-            bool checkMenu3 = Tool.PixelSearch(691, 47, 0xFFFFFF, ss);
-            bool checkMenu4 = Tool.PixelSearch(118, 574, 0xFFFFFF, ss);
-            bool checkMenu5 = Tool.PixelSearch(344, 571, 0xFFFFFF, ss);
-            bool checkMenu6 = Tool.PixelSearch(686, 569, 0xFFFFFF, ss);
-            if (checkMenu1 && checkMenu2 && checkMenu3 && checkMenu4 && checkMenu5 && checkMenu6)
+            bool checkMenu1 = Tool.PixelSearch(113, 55, 0xFFFFFF, ss);      // character
+            bool checkMenu2 = Tool.PixelSearch(345, 53, 0xFFFFFF, ss);      // bag
+            bool checkMenu3 = Tool.PixelSearch(570, 59, 0xFFFFFF, ss);      // mail
+            bool checkMenu4 = Tool.PixelSearch(118, 574, 0xFFFFFF, ss);     // shop
+            bool checkMenu5 = Tool.PixelSearch(683, 590, 0xFFFFFF, ss);     // settings
+            if (checkMenu1 && checkMenu2 && checkMenu3 && checkMenu4 && checkMenu5)
             {
                 Tool.Mouse_Click(638, 332);   // close mail 
                 Thread.Sleep(50);
