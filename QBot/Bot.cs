@@ -583,6 +583,9 @@ namespace QMapleBot
                     Thread.Sleep(100);
                 }
 
+                // close event
+                Event.Do_Event(ss2);
+
                 bool checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss2);       // check hp
                 bool checkMp = Tool.PixelSearch(15, 77, 0x0096FF, ss2);       // check mp
 

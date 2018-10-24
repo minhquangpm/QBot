@@ -53,7 +53,7 @@ namespace QMapleBot
                 Thread.Sleep(50);
             }
 
-            // event pakage
+            // event package
             bool checkPackage1 = Tool.PixelSearch(114, 148, 0xF47920, ss); // M icon left corner
             bool checkPackage2 = Tool.PixelSearch(513, 512, 0xFFD200, ss); // shop
             bool checkPackage3 = Tool.PixelSearch(693, 148, 0xFFFFFF, ss); // x icon            
