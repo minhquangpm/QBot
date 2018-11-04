@@ -51,9 +51,9 @@ namespace QMapleBot
             checkAuto2 = Tool.PixelSearch(219, 603, 0x5c5d5c, ss2);  // check bot of l in Battle (gray)
             checkAuto3 = Tool.PixelSearch(215, 603, 0x6f6f6f, ss2);  // check bot of 2nd t in Battle (gray)
 
-            checkAuto4 = Tool.PixelSearch(200, 591, 0xE1D195, ss2); // check top of A in AUTO (yellow)
-            checkAuto5 = Tool.PixelSearch(215, 591, 0xEADA9C, ss2); // check top of T in AUTO (yellow)
-            checkAuto6 = Tool.PixelSearch(222, 591, 0xAFA375, ss2); // check top of O in AUTO (yellow)
+            checkAuto4 = Tool.PixelSearch(200, 591, 0xEEDE9E, ss); // check top of A in AUTO (yellow)
+            checkAuto5 = Tool.PixelSearch(215, 591, 0xEDDD9E, ss); // check top of T in AUTO (yellow)
+            checkAuto6 = Tool.PixelSearch(222, 591, 0xB0A375, ss); // check top of O in AUTO (yellow)
             // release resources after use
             ss2.Dispose();
 
