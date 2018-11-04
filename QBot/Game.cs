@@ -22,9 +22,9 @@ namespace QMapleBot
             bool checkAuto2 = Tool.PixelSearch(219, 603, 0x5c5d5c, ss);  // check bot of l in Battle (gray)
             bool checkAuto3 = Tool.PixelSearch(215, 603, 0x6f6f6f, ss);  // check bot of 2nd t in Battle (gray)
 
-            bool checkAuto4 = Tool.PixelSearch(200, 591, 0xE1D195, ss); // check top of A in AUTO (yellow)
-            bool checkAuto5 = Tool.PixelSearch(215, 591, 0xEADA9C, ss); // check top of T in AUTO (yellow)
-            bool checkAuto6 = Tool.PixelSearch(222, 591, 0xAFA375, ss); // check top of O in AUTO (yellow)
+            bool checkAuto4 = Tool.PixelSearch(200, 591, 0xEEDE9E, ss); // check top of A in AUTO (yellow)
+            bool checkAuto5 = Tool.PixelSearch(215, 591, 0xEDDD9E, ss); // check top of T in AUTO (yellow)
+            bool checkAuto6 = Tool.PixelSearch(222, 591, 0xB0A375, ss); // check top of O in AUTO (yellow)
 
             bool checkQuestTab = Tool.PixelSearch(23, 145, 0xF9492B, ss);
             if ((checkQuestTab && checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
