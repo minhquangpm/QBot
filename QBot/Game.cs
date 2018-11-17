@@ -26,46 +26,64 @@ namespace QMapleBot
             bool checkAuto5 = Tool.PixelSearch(215, 591, 0xEDDD9E, ss); // check top of T in AUTO (yellow)
             bool checkAuto6 = Tool.PixelSearch(222, 591, 0xB0A375, ss); // check top of O in AUTO (yellow)
 
-            bool checkQuestTab = Tool.PixelSearch(23, 145, 0xF9492B, ss);
-            if ((checkQuestTab && checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
-                (checkQuestTab && checkHp && checkAuto4 && checkAuto5 && checkAuto6))
-            {
-                Tool.Mouse_Click(13, 151);  // click open quest tab
-                Thread.Sleep(50);
-            }
-
-
             if ((checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
-               (checkHp && checkAuto4 && checkAuto5 && checkAuto6))
+                (checkHp && checkAuto4 && checkAuto5 && checkAuto6))
             {
+                Tool.Mouse_Click(776, 48);
                 Thread.Sleep(500);
-                Tool.Mouse_Click(13, 256);   // click 2nd quest
-                Thread.Sleep(500);
-                //Write_Log("Doing 2nd quest");
-            }
-            // check if 2nd quest is clicked, if not click 1st quest
-            ss2 = Tool.PrintWindow(Bot.hwnd);
-            // check auto btn before lv20
-            checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss2);   // check hp
-            checkAuto1 = Tool.PixelSearch(202, 590, 0x606161, ss2);  // check mid of A in Auto (gray)
-            checkAuto2 = Tool.PixelSearch(219, 603, 0x5c5d5c, ss2);  // check bot of l in Battle (gray)
-            checkAuto3 = Tool.PixelSearch(215, 603, 0x6f6f6f, ss2);  // check bot of 2nd t in Battle (gray)
 
-            checkAuto4 = Tool.PixelSearch(200, 591, 0xEEDE9E, ss); // check top of A in AUTO (yellow)
-            checkAuto5 = Tool.PixelSearch(215, 591, 0xEDDD9E, ss); // check top of T in AUTO (yellow)
-            checkAuto6 = Tool.PixelSearch(222, 591, 0xB0A375, ss); // check top of O in AUTO (yellow)
-            // release resources after use
-            ss2.Dispose();
-
-            if ((checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
-               (checkHp && checkAuto4 && checkAuto5 && checkAuto6))
-            {
-                Tool.Mouse_Click(11, 177);   // click 1st quest if no 2nd quest
+                Tool.Mouse_Click(230, 65);
                 Thread.Sleep(500);
-                //Write_Log("2nd quest not found");
-                //Write_Log("Doing 1st quest");
+
+                Tool.Mouse_Click(141, 128);
+                Thread.Sleep(500);
+
+                Tool.Mouse_Click(337, 218);
+                Thread.Sleep(500);
+
+                Tool.Mouse_Click(723, 522);
+                Thread.Sleep(500);
             }
-        }
+
+
+                //bool checkQuestTab = Tool.PixelSearch(23, 145, 0xF9492B, ss);
+                //if ((checkQuestTab && checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
+                //    (checkQuestTab && checkHp && checkAuto4 && checkAuto5 && checkAuto6))
+                //{
+                //    Tool.Mouse_Click(13, 151);  // click open quest tab
+                //    Thread.Sleep(50);
+                //}
+
+
+                //if ((checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
+                //   (checkHp && checkAuto4 && checkAuto5 && checkAuto6))
+                //{
+                //    Thread.Sleep(500);
+                //    Tool.Mouse_Click(13, 256);   // click 2nd quest
+                //    Thread.Sleep(500);
+                //    //Write_Log("Doing 2nd quest");
+                //}
+                //// check if 2nd quest is clicked, if not click 1st quest
+                //ss2 = Tool.PrintWindow(Bot.hwnd);
+                //// check auto btn before lv20
+                //checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss2);   // check hp
+                //checkAuto1 = Tool.PixelSearch(202, 590, 0x606161, ss2);  // check mid of A in Auto (gray)
+                //checkAuto2 = Tool.PixelSearch(219, 603, 0x5c5d5c, ss2);  // check bot of l in Battle (gray)
+                //checkAuto3 = Tool.PixelSearch(215, 603, 0x6f6f6f, ss2);  // check bot of 2nd t in Battle (gray)
+
+                //checkAuto4 = Tool.PixelSearch(200, 591, 0xEEDE9E, ss); // check top of A in AUTO (yellow)
+                //checkAuto5 = Tool.PixelSearch(215, 591, 0xEDDD9E, ss); // check top of T in AUTO (yellow)
+                //checkAuto6 = Tool.PixelSearch(222, 591, 0xB0A375, ss); // check top of O in AUTO (yellow)
+                //// release resources after use
+                //ss2.Dispose();
+
+                //if ((checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
+                //   (checkHp && checkAuto4 && checkAuto5 && checkAuto6))
+                //{
+                //    Tool.Mouse_Click(11, 177);   // click 1st quest if no 2nd quest
+                //    Thread.Sleep(500);
+                //}
+            }
 
         // run skip
         public static void Do_Skip(Bitmap ss)
