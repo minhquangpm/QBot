@@ -16,10 +16,9 @@ using System.Collections.Generic;
  *      [x] Auto Tutorial
  *      [x] Auto Skill up
  *      [x] Auto Teleport
- *          [x] Auto Teleport when lv60+
- *      [ ] Auto Switch Char when lv 70
- *          [ ] Auto Switch Cygnus when lv76
- *      [ ] Auto Re-Login when crash game
+ *          [x] Auto Teleport when lv50+
+ *      [x] Auto Switch Char when lv 70
+ *      [ ] Auto Detect Stuck
  *
  * 
  */
@@ -346,6 +345,8 @@ namespace QMapleBot
                     Game.Do_CheckAlive(ss);
 
                     Game.Do_EquipPotion(ss);
+
+                    Game.Do_DetectStuck(ss);
 
                     Event.Do_Event(ss);
 

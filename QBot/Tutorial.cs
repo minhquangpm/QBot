@@ -259,22 +259,22 @@ namespace QMapleBot
             }
 
             // daily dungeon tut
-            bool checkDailyDungeon1 = Tool.PixelSearch(49, 256, 0xFBFBFA, ss);
-            bool checkDailyDungeon2 = Tool.PixelSearch(133, 303, 0x2CE785, ss);
-            bool checkDailyDungeon3 = Tool.PixelSearch(120, 189, 0xFBFBFB, ss);
+            bool checkDailyDungeon1 = Tool.PixelSearch(16, 395, 0xedc24c, ss);
+            bool checkDailyDungeon2 = Tool.PixelSearch(158, 397, 0xf2c24a, ss);
+            bool checkDailyDungeon3 = Tool.PixelSearch(95, 364, 0xebc24e, ss);
             if (checkDailyDungeon1 && checkDailyDungeon2 && checkDailyDungeon3)
             {
-                Tool.Mouse_Click(110, 253);   // click daily dungeon icon tut
+                Tool.Mouse_Click(87, 446);   // click daily dungeon icon tut
                 Thread.Sleep(50);
             }
 
             // elite dungeon tut
-            bool checkEliteDungeon1 = Tool.PixelSearch(188, 263, 0xD9C7D3, ss);
-            //bool checkEliteDungeon2 = Tool.PixelSearch(334, 264, 0xBFC8C2, ss);
-            bool checkEliteDungeon3 = Tool.PixelSearch(220, 282, 0xFF7B41, ss);
-            if (checkEliteDungeon1 && checkEliteDungeon3)
+            bool checkEliteDungeon1 = Tool.PixelSearch(297, 430, 0xe4c04d, ss);
+            bool checkEliteDungeon2 = Tool.PixelSearch(177, 539, 0xe1c252, ss);
+            bool checkEliteDungeon3 = Tool.PixelSearch(216, 364, 0xebc24e, ss);
+            if (checkEliteDungeon1 && checkEliteDungeon2 && checkEliteDungeon3)
             {
-                Tool.Mouse_Click(264, 284);   // click elite dungeon icon tut
+                Tool.Mouse_Click(252, 450);   // click elite dungeon icon tut
                 Thread.Sleep(50);
             }
         }

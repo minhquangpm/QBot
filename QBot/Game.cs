@@ -191,7 +191,6 @@ namespace QMapleBot
         // run teleport
         public static void Do_Teleport(Bitmap ss)
         {
-            // TODO: make this on/off
             bool checkTele1 = Tool.PixelSearch(466, 234, 0xFF7B50, ss);
             bool checkTele2 = Tool.PixelSearch(322, 236, 0x548FBA, ss);
             bool checkTele3 = Tool.PixelSearch(381, 238, 0x548FBA, ss);
@@ -205,10 +204,6 @@ namespace QMapleBot
 
         public static void Do_CheckTeleport(Bitmap ss)
         {
-            /*
-             * ToDo: make auto teleport when level 5x
-             */
-
             // detect level use teleport base on skill equiped (DK)
             bool checkLevelTele1 = Tool.PixelSearch(583, 521, 0x9966FF, ss);
             bool checkLevelTele2 = Tool.PixelSearch(610, 521, 0x330066, ss);
@@ -220,16 +215,34 @@ namespace QMapleBot
                 Thread.Sleep(50);
             }
 
-            // detect level use teleport base on skill equiped (DW)
-            bool checkLevelDW1 = Tool.PixelSearch(603, 520, 0xFF4400, ss);
-            bool checkLevelDW2 = Tool.PixelSearch(593, 530, 0xCC1100, ss);
-            bool checkLevelDW3 = Tool.PixelSearch(606, 549, 0x0099EE, ss);
-            //bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
-            if (checkLevelDW1 && checkLevelDW2 && checkLevelDW3)
+            bool checkLevel5xTele1 = Tool.PixelSearch(29, 42, 0xedca04, ss);
+            bool checkLevel5xTele2 = Tool.PixelSearch(31, 42, 0xe1c106, ss);
+            bool checkLevel5xTele3 = Tool.PixelSearch(29, 45, 0xe6c303, ss);
+            bool checkLevel5xTele4 = Tool.PixelSearch(32, 46, 0xf9d300, ss);
+            bool checkLevel5xTele5 = Tool.PixelSearch(29, 49, 0xe4c204, ss);
+
+            bool checkLevel5xTele6 = Tool.PixelSearch(605, 526, 0x000000, ss);
+            bool checkLevel5xTele7 = Tool.PixelSearch(583, 535, 0x440088, ss);
+            bool checkLevel5xTele8 = Tool.PixelSearch(597, 543, 0xbb55ff, ss);
+            bool checkLevel5xTele9 = Tool.PixelSearch(591, 546, 0xeebbff, ss);
+            if (checkLevel5xTele1 && checkLevel5xTele2 && checkLevel5xTele3 && checkLevel5xTele4 &&
+                checkLevel5xTele5 && checkLevel5xTele6 && checkLevel5xTele7 && checkLevel5xTele8 &&
+                checkLevel5xTele9)
             {
                 Bot.checkTele = true;
                 Thread.Sleep(50);
             }
+
+            //// detect level use teleport base on skill equiped (DW)
+            //bool checkLevelDW1 = Tool.PixelSearch(603, 520, 0xFF4400, ss);
+            //bool checkLevelDW2 = Tool.PixelSearch(593, 530, 0xCC1100, ss);
+            //bool checkLevelDW3 = Tool.PixelSearch(606, 549, 0x0099EE, ss);
+            ////bool checkLevelDW4 = Tool.PixelSearch(609, 533, 0xFFEE00, ss);
+            //if (checkLevelDW1 && checkLevelDW2 && checkLevelDW3)
+            //{
+            //    Bot.checkTele = true;
+            //    Thread.Sleep(50);
+            //}
         }
 
         // run revive
@@ -400,10 +413,28 @@ namespace QMapleBot
         // detect stuck lv3-20
         public static void Do_DetectStuck(Bitmap ss)
         {
-            // level 5
-            bool checkLevel5a = Tool.PixelSearch(29, 42, 0xEECC09, ss);
-            bool checkLevel5b = Tool.PixelSearch(32, 42, 0xC3AD10, ss);
-            bool checkLevel5c = Tool.PixelSearch(32, 46, 0xF9D300, ss);
+            // fking sleep afk
+            bool checkTeeth = Tool.PixelSearch(397, 489, 0xffffff, ss);
+            bool checkEye = Tool.PixelSearch(398, 476, 0xff9922, ss);
+            //bool checkBubble = Tool.PixelSearch(380, 485, 0xb3d0c0, ss);
+
+            bool checkTeeth1 = Tool.PixelSearch(406, 490, 0xffffff, ss);
+            bool checkEye1 = Tool.PixelSearch(405, 476, 0xff9922, ss);
+            //bool checkBubble1 = Tool.PixelSearch(380, 485, 0xb3d0c0, ss);
+
+            if ((checkTeeth && checkEye) |
+                (checkTeeth1 && checkEye1))
+            {
+                bool checkQuestTab = Tool.PixelSearch(23, 145, 0xF9492B, ss);
+                if (checkQuestTab)
+                {
+                    Tool.Mouse_Click(13, 151);  // click open quest tab
+                    Thread.Sleep(50);
+                }
+
+
+                Tool.Mouse_Click(75, 201);
+            }
         }
 
         // check player level

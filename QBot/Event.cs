@@ -13,55 +13,39 @@ namespace QMapleBot
         // event ingame
         public static void Do_Event(Bitmap ss)
         {
-            // event return cygnus
-            bool checkReturn1 = Tool.PixelSearch(86, 139, 0x515F6E, ss);
-            bool checkReturn2 = Tool.PixelSearch(92, 194, 0x23AFFF, ss);
-            bool checkReturn3 = Tool.PixelSearch(716, 142, 0xFFFFFF, ss);
-            if (checkReturn1 && checkReturn2 && checkReturn3)
+            // event royal hair big banner
+            bool checkRoyalhair1 = Tool.PixelSearch(64, 107, 0x961a2c, ss);
+            bool checkRoyalhair2 = Tool.PixelSearch(751, 112, 0x491b13, ss);
+            bool checkRoyalhair3 = Tool.PixelSearch(470, 170, 0xd5c09f, ss);
+            if (checkRoyalhair1 && checkRoyalhair2 && checkRoyalhair3)
             {
-                Tool.Mouse_Click(716, 142);   // close event banner
+                Tool.Mouse_Click(751, 112);   // close event banner
                 Thread.Sleep(50);
             }
 
-            // event golden apple
-            bool checkEventGA1 = Tool.PixelSearch(114, 148, 0xF47920, ss); // M icon left corner
-            bool checkEventGA2 = Tool.PixelSearch(242, 389, 0xEAB20A, ss); // golden apple
-            bool checkEventGA3 = Tool.PixelSearch(691, 150, 0xAF895B, ss); // yellow x icon
-            if (checkEventGA1 && checkEventGA2 && checkEventGA3)
+            // close big banner
+            bool checkBigEvent1 = Tool.PixelSearch(118, 157, 0xf47920, ss);
+            bool checkBigEvent2 = Tool.PixelSearch(106, 161, 0xf47920, ss);
+            bool checkBigEvent3 = Tool.PixelSearch(131, 162, 0xf47920, ss);
+            if (checkBigEvent1 && checkBigEvent2 && checkBigEvent3)
             {
-                Tool.Mouse_Click(691, 150);   // close event banner
+                Tool.Mouse_Click(691, 149);   // close event banner
                 Thread.Sleep(50);
             }
 
-            // event royal style doctor
-            bool checkRoyalStyle1 = Tool.PixelSearch(114, 148, 0xF47920, ss); // M icon left corner
-            bool checkRoyalStyle2 = Tool.PixelSearch(513, 512, 0xFFD200, ss); // package shop
-            bool checkRoyalStyle3 = Tool.PixelSearch(693, 148, 0x879BB1, ss); // x icon            
-            if (checkRoyalStyle1 && checkRoyalStyle2 && checkRoyalStyle3)
+            // close small banners
+            bool checkSmallEvent1 = Tool.PixelSearch(116, 147, 0xf47920, ss);
+            bool checkSmallEvent2 = Tool.PixelSearch(107, 152, 0xf47920, ss);
+            bool checkSmallEvent3 = Tool.PixelSearch(123, 152, 0xf47920, ss);
+            if (checkSmallEvent1 && checkSmallEvent2 && checkSmallEvent3)
             {
-                Tool.Mouse_Click(693, 148);   // close event banner
+                Tool.Mouse_Click(126, 493);   // do not show again today
                 Thread.Sleep(50);
             }
 
-            // event buff pet
-            bool checkBuffPet1 = Tool.PixelSearch(114, 148, 0xF47920, ss); // M icon left corner
-            bool checkBuffPet2 = Tool.PixelSearch(513, 512, 0xFFD200, ss); // shop
-            bool checkBuffPet3 = Tool.PixelSearch(693, 148, 0xBBBEC4, ss); // x icon            
-            if (checkBuffPet1 && checkBuffPet2 && checkBuffPet3)
-            {
-                Tool.Mouse_Click(693, 148);   // close event banner
-                Thread.Sleep(50);
-            }
 
-            // event package
-            bool checkPackage1 = Tool.PixelSearch(114, 148, 0xF47920, ss); // M icon left corner
-            bool checkPackage2 = Tool.PixelSearch(513, 512, 0xFFD200, ss); // shop
-            bool checkPackage3 = Tool.PixelSearch(693, 148, 0xFFFFFF, ss); // x icon            
-            if (checkPackage1 && checkPackage2 && checkPackage3)
-            {
-                Tool.Mouse_Click(693, 148);   // close event banner
-                Thread.Sleep(50);
-            }
+            Tool.Mouse_Click(530, 222);
+            Thread.Sleep(100);
         }
     }
 }
