@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace QMapleBot
 {
@@ -12,6 +13,10 @@ namespace QMapleBot
         private static bool hpPot = true;
         private static bool mpPot = true;
 
+
+        // check stuck
+        //private static bool checkStuck = false;
+        private static int countStuck = 0;
 
         // run quest
         public static void Do_Quest(Bitmap ss)
@@ -26,64 +31,57 @@ namespace QMapleBot
             bool checkAuto5 = Tool.PixelSearch(215, 591, 0xEDDD9E, ss); // check top of T in AUTO (yellow)
             bool checkAuto6 = Tool.PixelSearch(222, 591, 0xB0A375, ss); // check top of O in AUTO (yellow)
 
+
+
+            bool checkQuestTab = Tool.PixelSearch(22, 144, 0xfc492b, ss);
+            if ((checkQuestTab && checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
+                (checkQuestTab && checkHp && checkAuto4 && checkAuto5 && checkAuto6))
+            {
+                Tool.MouseClick(13, 151);  // click open quest tab
+                Thread.Sleep(50);
+            }
+
+            // do quest
             if ((checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
                 (checkHp && checkAuto4 && checkAuto5 && checkAuto6))
             {
-                Tool.Mouse_Click(776, 48);
+                if (countStuck > 2)
+                {
+                    Tool.MouseClick(10, 244);
+                    Thread.Sleep(500);
+
+                    Tool.MouseClick(22, 214);
+                    Thread.Sleep(500);
+                }
+
+                Tool.MouseClick(776, 48);
                 Thread.Sleep(500);
 
-                Tool.Mouse_Click(230, 65);
+                Tool.MouseClick(230, 65);
                 Thread.Sleep(500);
 
-                Tool.Mouse_Click(141, 128);
+                Tool.MouseClick(141, 128);
                 Thread.Sleep(500);
 
-                Tool.Mouse_Click(337, 218);
+                Tool.MouseClick(337, 218);
                 Thread.Sleep(500);
 
-                Tool.Mouse_Click(723, 522);
+                Tool.MouseClick(723, 522);
                 Thread.Sleep(500);
+
+                Tool.MouseClick(779, 131);
+                Thread.Sleep(500);
+
+                Tool.MouseClick(796, 370);
+                Thread.Sleep(500);
+
+                countStuck++;
             }
-
-
-                //bool checkQuestTab = Tool.PixelSearch(23, 145, 0xF9492B, ss);
-                //if ((checkQuestTab && checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
-                //    (checkQuestTab && checkHp && checkAuto4 && checkAuto5 && checkAuto6))
-                //{
-                //    Tool.Mouse_Click(13, 151);  // click open quest tab
-                //    Thread.Sleep(50);
-                //}
-
-
-                //if ((checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
-                //   (checkHp && checkAuto4 && checkAuto5 && checkAuto6))
-                //{
-                //    Thread.Sleep(500);
-                //    Tool.Mouse_Click(13, 256);   // click 2nd quest
-                //    Thread.Sleep(500);
-                //    //Write_Log("Doing 2nd quest");
-                //}
-                //// check if 2nd quest is clicked, if not click 1st quest
-                //ss2 = Tool.PrintWindow(Bot.hwnd);
-                //// check auto btn before lv20
-                //checkHp = Tool.PixelSearch(15, 63, 0xDD280A, ss2);   // check hp
-                //checkAuto1 = Tool.PixelSearch(202, 590, 0x606161, ss2);  // check mid of A in Auto (gray)
-                //checkAuto2 = Tool.PixelSearch(219, 603, 0x5c5d5c, ss2);  // check bot of l in Battle (gray)
-                //checkAuto3 = Tool.PixelSearch(215, 603, 0x6f6f6f, ss2);  // check bot of 2nd t in Battle (gray)
-
-                //checkAuto4 = Tool.PixelSearch(200, 591, 0xEEDE9E, ss); // check top of A in AUTO (yellow)
-                //checkAuto5 = Tool.PixelSearch(215, 591, 0xEDDD9E, ss); // check top of T in AUTO (yellow)
-                //checkAuto6 = Tool.PixelSearch(222, 591, 0xB0A375, ss); // check top of O in AUTO (yellow)
-                //// release resources after use
-                //ss2.Dispose();
-
-                //if ((checkHp && checkAuto1 && checkAuto2 && checkAuto3) ||
-                //   (checkHp && checkAuto4 && checkAuto5 && checkAuto6))
-                //{
-                //    Tool.Mouse_Click(11, 177);   // click 1st quest if no 2nd quest
-                //    Thread.Sleep(500);
-                //}
+            else
+            {
+                countStuck = 0;
             }
+        }
 
         // run skip
         public static void Do_Skip(Bitmap ss)
@@ -96,7 +94,7 @@ namespace QMapleBot
             //bool checkSkip4 = Tool.PixelSearch(18, 64, 0x6F1405, ss);    // check hp when darker
             if (checkSkip1 && checkSkip2 && checkSkip3)
             {
-                Tool.Mouse_Click(56, 66);    // click skip
+                Tool.MouseClick(56, 66);    // click skip
                 Thread.Sleep(50);
                 //Write_Log("Skip");
             }
@@ -108,7 +106,7 @@ namespace QMapleBot
             bool checkSkipBig4 = Tool.PixelSearch(18, 64, 0xDD280A, ss);    // check hp when darker
             if (checkSkipBig1 && checkSkipBig2 && checkSkipBig3 && checkSkipBig4)
             {
-                Tool.Mouse_Click(770, 100);    // click skip
+                Tool.MouseClick(770, 100);    // click skip
                 Thread.Sleep(50);
                 //Write_Log("Skip");
             }
@@ -121,7 +119,7 @@ namespace QMapleBot
             bool checkConfirmTut2 = Tool.PixelSearch(713, 575, 0xFF7B50, ss);
             if (checkConfirmTut1 && checkConfirmTut2)
             {
-                Tool.Mouse_Click(710, 587);  // click accept
+                Tool.MouseClick(710, 587);  // click accept
                 Thread.Sleep(50);
                 //Write_Log("Confirm");
             }
@@ -132,7 +130,7 @@ namespace QMapleBot
             bool checkConfirmDead2 = Tool.PixelSearch(459, 441, 0xFF7B50, ss);
             if (checkConfirmDead1 && checkConfirmDead2)
             {
-                Tool.Mouse_Click(402, 449);
+                Tool.MouseClick(402, 449);
                 Thread.Sleep(50);
             }
         }
@@ -144,7 +142,7 @@ namespace QMapleBot
             bool checkClaim2 = Tool.PixelSearch(463, 503, 0xFF7B50, ss);
             if (checkClaim1 && checkClaim2)
             {
-                Tool.Mouse_Click(399, 505);
+                Tool.MouseClick(399, 505);
                 Thread.Sleep(50);
                 //Write_Log("Claim reward");
             }
@@ -158,7 +156,7 @@ namespace QMapleBot
             bool checkEquip3 = Tool.PixelSearch(710, 373, 0xFFFEFE, ss);
             if (checkEquip1 && checkEquip2 && checkEquip3)
             {
-                Tool.Mouse_Click(727, 378);
+                Tool.MouseClick(727, 378);
                 Thread.Sleep(50);
                 //Write_Log("Equip");
             }
@@ -172,7 +170,7 @@ namespace QMapleBot
             bool checkComplete2 = Tool.PixelSearch(259, 520, 0x59B0A8, ss);
             if (checkComplete1 && checkComplete2)
             {
-                Tool.Mouse_Click(222, 515);
+                Tool.MouseClick(222, 515);
                 Thread.Sleep(50);
                 //Write_Log("Confirm quest");
             }
@@ -182,7 +180,7 @@ namespace QMapleBot
             bool checkAvailable2 = Tool.PixelSearch(259, 520, 0xFF7B50, ss);
             if (checkAvailable1 && checkAvailable2)
             {
-                Tool.Mouse_Click(222, 515);
+                Tool.MouseClick(222, 515);
                 Thread.Sleep(50);
                 //Write_Log("Select quest");
             }
@@ -196,7 +194,7 @@ namespace QMapleBot
             bool checkTele3 = Tool.PixelSearch(381, 238, 0x548FBA, ss);
             if (checkTele1 && checkTele2 && checkTele3)
             {
-                Tool.Mouse_Click(448, 244);
+                Tool.MouseClick(448, 244);
                 Thread.Sleep(50);
                 //Write_Log("Use teleport");
             }
@@ -253,7 +251,7 @@ namespace QMapleBot
             bool checkRevive3 = Tool.PixelSearch(383, 420, 0x59B0A8, ss);
             if (checkRevive1 && checkRevive2 && checkRevive3)
             {
-                Tool.Mouse_Click(249, 426);
+                Tool.MouseClick(249, 426);
                 Thread.Sleep(50);
                 //Write_Log("Revive");
             }
@@ -268,7 +266,7 @@ namespace QMapleBot
             bool checkSkill3 = Tool.PixelSearch(610, 348, 0xF03030, ss); // check SP icon
             if (checkSkill1 && checkSkill2 && checkSkill3)
             {
-                Tool.Mouse_Click(723, 373);
+                Tool.MouseClick(723, 373);
                 Thread.Sleep(50);
                 //Write_Log("Use Skill");
             }
@@ -285,24 +283,24 @@ namespace QMapleBot
             // check if skill equip
             if (!checkSkillEquip && checkSkillTabOpen)
             {
-                Tool.Mouse_Click(665, 261);  // click equip
+                Tool.MouseClick(665, 261);  // click equip
                 Thread.Sleep(50);
-                Tool.Mouse_Click(177, 327);  // click equip
+                Tool.MouseClick(177, 327);  // click equip
                 Thread.Sleep(50);
             }
             // check if skill not max level
             if (checkSkillMain1 && checkSkillTabOpen)
             {
                 //Write_Log("Skill up");
-                Tool.Mouse_Click(737, 260);  // level up 1st skill
+                Tool.MouseClick(737, 260);  // level up 1st skill
                 Thread.Sleep(50);
-                Tool.Mouse_Click(737, 260);  // level up 1st skill
+                Tool.MouseClick(737, 260);  // level up 1st skill
                 Thread.Sleep(50);
-                Tool.Mouse_Click(737, 260);  // level up 1st skill
+                Tool.MouseClick(737, 260);  // level up 1st skill
                 Thread.Sleep(50);
-                Tool.Mouse_Click(737, 260);  // level up 1st skill
+                Tool.MouseClick(737, 260);  // level up 1st skill
                 Thread.Sleep(50);
-                Tool.Mouse_Click(737, 260);  // level up 1st skill
+                Tool.MouseClick(737, 260);  // level up 1st skill
                 Thread.Sleep(50);
             }
 
@@ -310,9 +308,9 @@ namespace QMapleBot
             if (checkSkillMain2 && checkSkillTab1 && checkSkillTab2 && checkSkillTab3)
             {
                 //Write_Log("Exit skill menu");
-                Tool.Mouse_Click(777, 130);  // exit skill menu
+                Tool.MouseClick(777, 130);  // exit skill menu
                 Thread.Sleep(500);
-                Tool.Mouse_Click(77, 302);  // exit character menu
+                Tool.MouseClick(77, 302);  // exit character menu
                 Thread.Sleep(50);
             }
         }
@@ -326,7 +324,7 @@ namespace QMapleBot
             bool checkPlayer3 = Tool.PixelSearch(777, 129, 0xFFFFFF, ss);
             if (checkPlayer1 && checkPlayer2 && checkPlayer2)
             {
-                Tool.Mouse_Click(777, 129);   // Close player info
+                Tool.MouseClick(777, 129);   // Close player info
                 Thread.Sleep(50);
             }
 
@@ -336,7 +334,7 @@ namespace QMapleBot
             bool checkMail3 = Tool.PixelSearch(648, 141, 0xFFFFFF, ss);
             if (checkMail1 && checkMail2 && checkMail3)
             {
-                Tool.Mouse_Click(648, 141);   // close mail 
+                Tool.MouseClick(648, 141);   // close mail 
                 Thread.Sleep(50);
             }
 
@@ -348,7 +346,7 @@ namespace QMapleBot
             bool checkMenu5 = Tool.PixelSearch(683, 590, 0xFFFFFF, ss);     // settings
             if (checkMenu1 && checkMenu2 && checkMenu3 && checkMenu4 && checkMenu5)
             {
-                Tool.Mouse_Click(638, 332);   // close mail 
+                Tool.MouseClick(638, 332);   // close mail 
                 Thread.Sleep(50);
             }
 
@@ -358,7 +356,7 @@ namespace QMapleBot
             bool checkFever3 = Tool.PixelSearch(453, 440, 0xFF7B50, ss);      // purchase
             if (checkFever1 && checkFever2 && checkFever3)
             {
-                Tool.Mouse_Click(617, 183);   // close mail 
+                Tool.MouseClick(617, 183);   // close mail 
                 Thread.Sleep(50);
             }
         }
@@ -372,7 +370,7 @@ namespace QMapleBot
             bool equipHp3 = Tool.PixelSearch(725, 431, 0xEEEEEE, ss);
             if (equipHp1 && equipHp2 && equipHp3)
             {
-                Tool.Mouse_Click(718, 418);
+                Tool.MouseClick(718, 418);
                 hpPot = false;
                 Thread.Sleep(50);
             }
@@ -383,7 +381,7 @@ namespace QMapleBot
             bool equipMp3 = Tool.PixelSearch(776, 432, 0xDEDEDE, ss);
             if (equipMp1 && equipMp2 && equipMp3)
             {
-                Tool.Mouse_Click(769, 422);
+                Tool.MouseClick(769, 422);
                 mpPot = false;
                 Thread.Sleep(50);
             }
@@ -395,12 +393,12 @@ namespace QMapleBot
             //bool checkPot4 = Tool.PixelSearch(464, 508, 0xFF7B50, ss);
             if (checkPot1 && checkPot2 && checkPot3)
             {
-                Tool.Mouse_Click(536, 220);
+                Tool.MouseClick(536, 220);
                 Thread.Sleep(50);
             }
             //else if (checkPot2 && checkPot3 && checkPot4)
             //{
-            //    Tool.Mouse_Click(399, 499);
+            //    Tool.MouseClick(399, 499);
             //    Thread.Sleep(50);
             //}
 
@@ -410,32 +408,6 @@ namespace QMapleBot
 
         }
 
-        // detect stuck lv3-20
-        public static void Do_DetectStuck(Bitmap ss)
-        {
-            // fking sleep afk
-            bool checkTeeth = Tool.PixelSearch(397, 489, 0xffffff, ss);
-            bool checkEye = Tool.PixelSearch(398, 476, 0xff9922, ss);
-            //bool checkBubble = Tool.PixelSearch(380, 485, 0xb3d0c0, ss);
-
-            bool checkTeeth1 = Tool.PixelSearch(406, 490, 0xffffff, ss);
-            bool checkEye1 = Tool.PixelSearch(405, 476, 0xff9922, ss);
-            //bool checkBubble1 = Tool.PixelSearch(380, 485, 0xb3d0c0, ss);
-
-            if ((checkTeeth && checkEye) |
-                (checkTeeth1 && checkEye1))
-            {
-                bool checkQuestTab = Tool.PixelSearch(23, 145, 0xF9492B, ss);
-                if (checkQuestTab)
-                {
-                    Tool.Mouse_Click(13, 151);  // click open quest tab
-                    Thread.Sleep(50);
-                }
-
-
-                Tool.Mouse_Click(75, 201);
-            }
-        }
 
         // check player level
         public static void Do_CheckLevel(Bitmap ss)
@@ -473,21 +445,21 @@ namespace QMapleBot
                 if (checkAutoRun)
                 {
                     // press cancel autorun
-                    Tool.Mouse_Click(350, 240);
+                    Tool.MouseClick(350, 240);
                     Thread.Sleep(1000);
                 }
 
 
                 // press menu
-                Tool.Mouse_Click(775, 51);
+                Tool.MouseClick(775, 51);
                 Thread.Sleep(1000);
 
                 // press options
-                Tool.Mouse_Click(685, 584);
+                Tool.MouseClick(685, 584);
                 Thread.Sleep(1000);
 
                 // press select char
-                Tool.Mouse_Click(407, 505);
+                Tool.MouseClick(407, 505);
                 Thread.Sleep(1000);
             }
 
@@ -497,7 +469,7 @@ namespace QMapleBot
             bool checkStuckOption3 = Tool.PixelSearch(398, 493, 0x548FBA, ss);
             if (checkStuckOption1 && checkStuckOption2 && checkStuckOption3)
             {
-                Tool.Mouse_Click(399, 505);   // press select char 
+                Tool.MouseClick(399, 505);   // press select char 
                 Thread.Sleep(1000);
             }
 
@@ -537,33 +509,33 @@ namespace QMapleBot
             }
         }
 
-        // check game alive 
-        public static void Do_CheckAlive(Bitmap ss)
-        {
-            /*
-             * the game crash and somehow nox's tutorial pop up,
-             * we check the tutorial pixel to see if nox is crash.
-             */
-            bool checkGameDis1 = Tool.PixelSearch(410, 163, 0xFFFFFF, ss);
-            bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss);
-            bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss);
+        //// check game alive 
+        //public static void Do_CheckAlive(Bitmap ss)
+        //{
+        //    /*
+        //     * the game crash and somehow nox's tutorial pop up,
+        //     * we check the tutorial pixel to see if nox is crash.
+        //     */
+        //    bool checkGameDis1 = Tool.PixelSearch(410, 163, 0xFFFFFF, ss);
+        //    bool checkGameDis2 = Tool.PixelSearch(309, 514, 0x37D38A, ss);
+        //    bool checkGameDis3 = Tool.PixelSearch(394, 549, 0xF003F5, ss);
 
-            bool checkOpenMaple1 = Tool.PixelSearch(270, 220, 0xF8B733, ss);
-            bool checkOpenMaple2 = Tool.PixelSearch(129, 199, 0x53C4F7, ss);
-            bool checkOpenMaple3 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss);
+        //    bool checkOpenMaple1 = Tool.PixelSearch(270, 220, 0xF8B733, ss);
+        //    bool checkOpenMaple2 = Tool.PixelSearch(129, 199, 0x53C4F7, ss);
+        //    bool checkOpenMaple3 = Tool.PixelSearch(396, 320, 0xFFFFFF, ss);
 
-            if ((checkGameDis1 && checkGameDis2 && checkGameDis3) ||
-               (checkOpenMaple1 && checkOpenMaple2 && checkOpenMaple3))
-            {
-                //string error_msg = Bot.name.Text + ": Maple has stop working";
-                //Tool.SendGmail(Bot.name.Text, error_msg);
+        //    if ((checkGameDis1 && checkGameDis2 && checkGameDis3) ||
+        //       (checkOpenMaple1 && checkOpenMaple2 && checkOpenMaple3))
+        //    {
+        //        //string error_msg = Bot.name.Text + ": Maple has stop working";
+        //        //Tool.SendGmail(Bot.name.Text, error_msg);
 
-                // start worker4
-                if (!Bot.worker4.IsBusy)
-                {
-                    Bot.worker4.RunWorkerAsync();
-                }
-            }
-        }
+        //        // start worker4
+        //        if (!Bot.worker4.IsBusy)
+        //        {
+        //            Bot.worker4.RunWorkerAsync();
+        //        }
+        //    }
+        //}
     }
 }

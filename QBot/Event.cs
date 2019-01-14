@@ -19,7 +19,7 @@ namespace QMapleBot
             bool checkRoyalhair3 = Tool.PixelSearch(470, 170, 0xd5c09f, ss);
             if (checkRoyalhair1 && checkRoyalhair2 && checkRoyalhair3)
             {
-                Tool.Mouse_Click(751, 112);   // close event banner
+                Tool.MouseClick(751, 112);   // close event banner
                 Thread.Sleep(50);
             }
 
@@ -29,7 +29,7 @@ namespace QMapleBot
             bool checkBigEvent3 = Tool.PixelSearch(131, 162, 0xf47920, ss);
             if (checkBigEvent1 && checkBigEvent2 && checkBigEvent3)
             {
-                Tool.Mouse_Click(691, 149);   // close event banner
+                Tool.MouseClick(691, 149);   // close event banner
                 Thread.Sleep(50);
             }
 
@@ -37,15 +37,30 @@ namespace QMapleBot
             bool checkSmallEvent1 = Tool.PixelSearch(116, 147, 0xf47920, ss);
             bool checkSmallEvent2 = Tool.PixelSearch(107, 152, 0xf47920, ss);
             bool checkSmallEvent3 = Tool.PixelSearch(123, 152, 0xf47920, ss);
-            if (checkSmallEvent1 && checkSmallEvent2 && checkSmallEvent3)
+
+            bool checkSmallEvent4 = Tool.PixelSearch(106, 155, 0xf47920, ss);
+            bool checkSmallEvent5 = Tool.PixelSearch(121, 154, 0xf47920, ss);
+
+            if ((checkSmallEvent1 && checkSmallEvent2 && checkSmallEvent3) ||
+                (checkSmallEvent1 && checkSmallEvent4 && checkSmallEvent5))
             {
-                Tool.Mouse_Click(126, 493);   // do not show again today
+                Tool.MouseClick(126, 493);   // do not show again today
+                Thread.Sleep(50);
+            }
+
+            // close attendance
+            bool checkAttendance1 = Tool.PixelSearch(101, 134, 0x515f6e, ss);
+            bool checkAttendance2 = Tool.PixelSearch(666, 142, 0x515f6e, ss);
+            bool checkAttendance3 = Tool.PixelSearch(677, 276, 0xff2b4c, ss);
+            if (checkAttendance1 && checkAttendance2 && checkAttendance3)
+            {
+                Tool.MouseClick(717, 143);   // close attendance banner
                 Thread.Sleep(50);
             }
 
 
-            Tool.Mouse_Click(530, 222);
-            Thread.Sleep(100);
+            //Tool.MouseClick(796, 370);
+            //Thread.Sleep(100);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace QMapleBot
             bool checkTutor3 = Tool.PixelSearch(143, 173, 0xF8F5EA, ss);
             if (checkTutor1 && checkTutor2 && checkTutor3)
             {
-                Tool.Mouse_Click(36, 192);   // Click tutorials
+                Tool.MouseClick(36, 192);   // Click tutorials
                 Thread.Sleep(50);
                 //Write_Log("Auto Tutorial");
             }
@@ -28,7 +28,7 @@ namespace QMapleBot
             //bool checkCharIcon2 = Tool.PixelSearch(115, 54, 0xFFFFFF, ss);
             if (checkCharIcon1)
             {
-                Tool.Mouse_Click(116, 59);   // click character icon
+                Tool.MouseClick(116, 59);   // click character icon
                 Thread.Sleep(50);
             }
 
@@ -37,7 +37,7 @@ namespace QMapleBot
             //bool checkPetIcon2 = Tool.PixelSearch(313, 130, 0xCECEBE, ss);
             if (checkPetIcon1)
             {
-                Tool.Mouse_Click(293, 135);   // click pet icon
+                Tool.MouseClick(293, 135);   // click pet icon
                 Thread.Sleep(50);
             }
 
@@ -47,7 +47,7 @@ namespace QMapleBot
             bool checkChoosePet3 = Tool.PixelSearch(552, 211, 0x548FBA, ss);
             if (checkChoosePet1 && checkChoosePet2 && !checkChoosePet3)
             {
-                Tool.Mouse_Click(488, 240);   // click choose pet
+                Tool.MouseClick(488, 240);   // click choose pet
                 Thread.Sleep(50);
             }
 
@@ -57,7 +57,7 @@ namespace QMapleBot
             bool checkConfirmPet3 = Tool.PixelSearch(705, 502, 0xFF7B50, ss);
             if (checkConfirmPet1 && checkConfirmPet2 && checkConfirmPet3)
             {
-                Tool.Mouse_Click(739, 506);   // click choose pet
+                Tool.MouseClick(739, 506);   // click choose pet
                 Thread.Sleep(50);
             }
         }
@@ -70,7 +70,7 @@ namespace QMapleBot
             bool checkTreasureIcon2 = Tool.PixelSearch(681, 55, 0xFFFFFE, ss);
             if (checkTreasureIcon1 && checkTreasureIcon2)
             {
-                Tool.Mouse_Click(655, 51);   // click treasure icon
+                Tool.MouseClick(655, 51);   // click treasure icon
                 Thread.Sleep(50);
             }
 
@@ -80,7 +80,7 @@ namespace QMapleBot
             bool checkTreasureTab3 = Tool.PixelSearch(41, 444, 0xCBCBCB, ss);
             if (checkTreasureTab1 && checkTreasureTab2 && checkTreasureTab3)
             {
-                Tool.Mouse_Click(36, 413);   // click treasure tab
+                Tool.MouseClick(36, 413);   // click treasure tab
                 Thread.Sleep(50);
             }
 
@@ -90,7 +90,7 @@ namespace QMapleBot
             bool checkTreasureFree3 = Tool.PixelSearch(625, 520, 0xE45F36, ss);
             if (checkTreasureFree1 && checkTreasureFree2 && checkTreasureFree3)
             {
-                Tool.Mouse_Click(685, 500);   // click treasure free
+                Tool.MouseClick(685, 500);   // click treasure free
                 Thread.Sleep(50);
             }
 
@@ -100,7 +100,7 @@ namespace QMapleBot
             bool checkTreasureConfirm3 = Tool.PixelSearch(443, 520, 0xFF7B50, ss);
             if (checkTreasureConfirm1 && checkTreasureConfirm2 && checkTreasureConfirm3)
             {
-                Tool.Mouse_Click(390, 508);   // click treasure confirm
+                Tool.MouseClick(390, 508);   // click treasure confirm
                 Thread.Sleep(50);
             }
         }
@@ -113,7 +113,7 @@ namespace QMapleBot
             //bool checkTutForge2 = Tool.PixelSearch(456, 48, 0xFFFFFF, ss);
             if (checkTutForge1)
             {
-                Tool.Mouse_Click(461, 62);   // click forge icon
+                Tool.MouseClick(461, 62);   // click forge icon
                 Thread.Sleep(50);
             }
 
@@ -122,7 +122,7 @@ namespace QMapleBot
             bool checkArmor3 = Tool.PixelSearch(574, 174, 0xFBFBFB, ss);
             if (checkArmor1 && checkArmor2 && checkArmor3)
             {
-                Tool.Mouse_Click(563, 191);  // click armor tab inventory
+                Tool.MouseClick(563, 191);  // click armor tab inventory
                 Thread.Sleep(50);
             }
 
@@ -130,7 +130,7 @@ namespace QMapleBot
             bool checkArmor5 = Tool.PixelSearch(526, 240, 0xFBFBFB, ss);
             if (checkArmor4 && checkArmor5)
             {
-                Tool.Mouse_Click(491, 235);  // click armor inventory
+                Tool.MouseClick(491, 235);  // click armor inventory
                 Thread.Sleep(50);
             }
 
@@ -138,7 +138,7 @@ namespace QMapleBot
             bool checkAutoSelect2 = Tool.PixelSearch(794, 519, 0xFBFBFB, ss);
             if (checkAutoSelect1 && checkAutoSelect2)
             {
-                Tool.Mouse_Click(739, 522);  // click auto-select
+                Tool.MouseClick(739, 522);  // click auto-select
                 Thread.Sleep(50);
             }
 
@@ -146,7 +146,7 @@ namespace QMapleBot
             bool checkLevelup2 = Tool.PixelSearch(434, 531, 0xFF7B50, ss);
             if (checkLevelup1 && checkLevelup2)
             {
-                Tool.Mouse_Click(399, 516);  // click level up
+                Tool.MouseClick(399, 516);  // click level up
                 Thread.Sleep(50);
             }
 
@@ -158,7 +158,7 @@ namespace QMapleBot
 
             if (checkEnhance1 && checkEnhance2 && checkEnhance3)
             {
-                Tool.Mouse_Click(47, 357);
+                Tool.MouseClick(47, 357);
                 Thread.Sleep(50);
             }
 
@@ -167,7 +167,7 @@ namespace QMapleBot
             bool checkStopSF2 = Tool.PixelSearch(432, 439, 0xFF7B50, ss);
             if (checkStopSF1 && checkStopSF2)
             {
-                Tool.Mouse_Click(401, 445);  // click level up
+                Tool.MouseClick(401, 445);  // click level up
                 Thread.Sleep(50);
             }
         }
@@ -179,7 +179,7 @@ namespace QMapleBot
             //bool checkFever12 = Tool.PixelSearch(522, 592, 0xFFFAF2, ss);
             if (checkFever11)
             {
-                Tool.Mouse_Click(517, 593);
+                Tool.MouseClick(517, 593);
                 Thread.Sleep(50);
             }
 
@@ -189,7 +189,7 @@ namespace QMapleBot
             bool checkPurchase3 = Tool.PixelSearch(576, 471, 0xE45F36, ss);
             if (checkPurchase1 && checkPurchase2 && checkPurchase3)
             {
-                Tool.Mouse_Click(502, 449);
+                Tool.MouseClick(502, 449);
                 Thread.Sleep(50);
             }
 
@@ -199,7 +199,7 @@ namespace QMapleBot
             bool checkConfirmPurchase3 = Tool.PixelSearch(551, 426, 0xFF7B50, ss);
             if (checkConfirmPurchase1 && checkConfirmPurchase2 && checkConfirmPurchase3)
             {
-                Tool.Mouse_Click(498, 430);
+                Tool.MouseClick(498, 430);
                 Thread.Sleep(50);
             }
         }
@@ -212,7 +212,7 @@ namespace QMapleBot
             bool checkJewelIcon3 = Tool.PixelSearch(377, 130, 0x808080, ss); // the jewel icon
             if ((checkJewelIcon1 && checkJewelIcon2) || (checkJewelIcon1 && checkJewelIcon3))
             {
-                Tool.Mouse_Click(381, 131);   // click jewel icon tut
+                Tool.MouseClick(381, 131);   // click jewel icon tut
                 Thread.Sleep(50);
             }
 
@@ -222,7 +222,7 @@ namespace QMapleBot
             bool checkJewel3 = Tool.PixelSearch(486, 112, 0xFFFFFE, ss);
             if (checkJewel1 && checkJewel2 && checkJewel3)
             {
-                Tool.Mouse_Click(489, 246);   // click jewel tut
+                Tool.MouseClick(489, 246);   // click jewel tut
                 Thread.Sleep(50);
             }
 
@@ -232,7 +232,7 @@ namespace QMapleBot
             bool checkRegisterJewel3 = Tool.PixelSearch(538, 508, 0xFF7B50, ss);
             if (checkRegisterJewel1 && checkRegisterJewel2 && checkRegisterJewel3)
             {
-                Tool.Mouse_Click(595, 503);   // click register jewel tut
+                Tool.MouseClick(595, 503);   // click register jewel tut
                 Thread.Sleep(50);
             }
 
@@ -242,7 +242,7 @@ namespace QMapleBot
             bool checkJewelSlot3 = Tool.PixelSearch(276, 231, 0xBCCDD4, ss);
             if (checkJewelSlot1 && checkJewelSlot2 && checkJewelSlot3)
             {
-                Tool.Mouse_Click(275, 222);   // click jewel slot tut
+                Tool.MouseClick(275, 222);   // click jewel slot tut
                 Thread.Sleep(50);
             }
         }
@@ -254,29 +254,49 @@ namespace QMapleBot
             //bool checkDungeonIcon2 = Tool.PixelSearch(685, 63, 0xFFFFFF, ss);
             if (checkDungeonIcon1)
             {
-                Tool.Mouse_Click(688, 58);   // click dungeon icon tut
+                Tool.MouseClick(688, 58);   // click dungeon icon tut
                 Thread.Sleep(50);
             }
 
             // daily dungeon tut
-            bool checkDailyDungeon1 = Tool.PixelSearch(16, 395, 0xedc24c, ss);
-            bool checkDailyDungeon2 = Tool.PixelSearch(158, 397, 0xf2c24a, ss);
-            bool checkDailyDungeon3 = Tool.PixelSearch(95, 364, 0xebc24e, ss);
+            bool checkDailyDungeon1 = Tool.PixelSearch(72, 191, 0xf0c24b, ss);
+            bool checkDailyDungeon2 = Tool.PixelSearch(158, 253, 0xf2c24a, ss);
+            bool checkDailyDungeon3 = Tool.PixelSearch(76, 366, 0xdcc255, ss);
             if (checkDailyDungeon1 && checkDailyDungeon2 && checkDailyDungeon3)
             {
-                Tool.Mouse_Click(87, 446);   // click daily dungeon icon tut
+                Tool.MouseClick(88, 277);   // click daily dungeon icon tut
                 Thread.Sleep(50);
             }
 
             // elite dungeon tut
-            bool checkEliteDungeon1 = Tool.PixelSearch(297, 430, 0xe4c04d, ss);
-            bool checkEliteDungeon2 = Tool.PixelSearch(177, 539, 0xe1c252, ss);
-            bool checkEliteDungeon3 = Tool.PixelSearch(216, 364, 0xebc24e, ss);
+            bool checkEliteDungeon1 = Tool.PixelSearch(207, 191, 0xf0c24b, ss);
+            bool checkEliteDungeon2 = Tool.PixelSearch(297, 257, 0xe4c04d, ss);
+            bool checkEliteDungeon3 = Tool.PixelSearch(216, 366, 0xdcc255, ss);
             if (checkEliteDungeon1 && checkEliteDungeon2 && checkEliteDungeon3)
             {
-                Tool.Mouse_Click(252, 450);   // click elite dungeon icon tut
+                Tool.MouseClick(216, 298);   // click elite dungeon icon tut
                 Thread.Sleep(50);
             }
+
+            //// daily dungeon tut
+            //bool checkDailyDungeon1 = Tool.PixelSearch(16, 395, 0xedc24c, ss);
+            //bool checkDailyDungeon2 = Tool.PixelSearch(158, 397, 0xf2c24a, ss);
+            //bool checkDailyDungeon3 = Tool.PixelSearch(95, 364, 0xebc24e, ss);
+            //if (checkDailyDungeon1 && checkDailyDungeon2 && checkDailyDungeon3)
+            //{
+            //    Tool.MouseClick(87, 446);   // click daily dungeon icon tut
+            //    Thread.Sleep(50);
+            //}
+
+            //// elite dungeon tut
+            //bool checkEliteDungeon1 = Tool.PixelSearch(297, 430, 0xe4c04d, ss);
+            //bool checkEliteDungeon2 = Tool.PixelSearch(177, 539, 0xe1c252, ss);
+            //bool checkEliteDungeon3 = Tool.PixelSearch(216, 364, 0xebc24e, ss);
+            //if (checkEliteDungeon1 && checkEliteDungeon2 && checkEliteDungeon3)
+            //{
+            //    Tool.MouseClick(252, 450);   // click elite dungeon icon tut
+            //    Thread.Sleep(50);
+            //}
         }
 
         public static void Tut_Auto(Bitmap ss)
@@ -287,7 +307,7 @@ namespace QMapleBot
             //bool checkAutoIcon3 = Tool.PixelSearch(215, 591, 0xEADA9C, ss); // check top of T in AUTO (yellow)
             if (checkAutoIcon1)
             {
-                Tool.Mouse_Click(210, 593);   // click elite dungeon icon tut
+                Tool.MouseClick(210, 593);   // click elite dungeon icon tut
                 Thread.Sleep(50);
             }
 
@@ -297,7 +317,7 @@ namespace QMapleBot
             bool checkUseFreeAuto3 = Tool.PixelSearch(609, 358, 0xFC492B, ss); // check top of T in AUTO (yellow)
             if (checkUseFreeAuto1 && checkUseFreeAuto2 && checkUseFreeAuto3)
             {
-                Tool.Mouse_Click(573, 363);   // click elite dungeon icon tut
+                Tool.MouseClick(573, 363);   // click elite dungeon icon tut
                 Thread.Sleep(50);
             }
 
@@ -307,7 +327,7 @@ namespace QMapleBot
             bool checkCloseAuto3 = Tool.PixelSearch(350, 345, 0xFF7B52, ss); // red circle
             if (checkCloseAuto1 && checkCloseAuto2 && checkCloseAuto3)
             {
-                Tool.Mouse_Click(618, 186);   // click elite dungeon icon tut
+                Tool.MouseClick(618, 186);   // click elite dungeon icon tut
                 Thread.Sleep(50);
             }
         }

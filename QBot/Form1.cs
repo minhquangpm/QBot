@@ -25,8 +25,9 @@ namespace QMapleBot
         {
             if (!Bot.worker1.IsBusy)
             {
-                // start worker1 run bot
+                // start worker1, worker5
                 Bot.worker1.RunWorkerAsync();
+                //Bot.worker5.RunWorkerAsync();
 
                 // enable btn
                 button1.Enabled = false;
@@ -47,8 +48,8 @@ namespace QMapleBot
             // stop worker3
             Bot.worker3.CancelAsync();
 
-            // stop worker4
-            Bot.worker4.CancelAsync();
+            // stop worker5
+            //Bot.worker5.CancelAsync();
 
             // stop tele
             Bot.checkTele = false;
