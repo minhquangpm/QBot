@@ -19,7 +19,7 @@ namespace QMapleBot
             Bot.name = this.label5;
             Bot.check_alive = this.label6;
         }
-        
+
         // start btn
         private void button1_Click(object sender, EventArgs e)
         {
@@ -37,6 +37,8 @@ namespace QMapleBot
                 label4.Text = "On";
                 label4.ForeColor = Color.Lime;
             }
+
+            UpdateThumb();
         }
 
         // stop btn
@@ -96,6 +98,20 @@ namespace QMapleBot
             {
                 Bot.checkTele = false;
             }
+        }
+
+        private void UpdateThumb()
+        {
+            int i = Win32.DwmRegisterThumbnail(this.Handle, Bot.hwnd, out Bot.thumb);
+
+            Win32.DWM_THUMBNAIL_PROPERTIES props = new Win32.DWM_THUMBNAIL_PROPERTIES();
+
+            props.fVisible = true;
+            props.dwFlags = Win32.DWM_TNP_VISIBLE | Win32.DWM_TNP_RECTDESTINATION | Win32.DWM_TNP_OPACITY;
+            props.opacity = 255;
+            props.rcDestination = new Win32.RECT(pnlPreview.Left, pnlPreview.Top, pnlPreview.Right, pnlPreview.Bottom);
+
+            Win32.DwmUpdateThumbnailProperties(Bot.thumb, ref props);
         }
     }
 }

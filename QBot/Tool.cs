@@ -8,7 +8,7 @@ namespace QMapleBot
 {
     class Tool
     {
-        private static Random rng = new Random();
+        //private static Random rng = new Random();
 
         // revert nox title
         public static void RevertWindowTitle()
@@ -52,8 +52,8 @@ namespace QMapleBot
         // send mouse click to nox
         public static void MouseClick(int x, int y)
         {
-            x = x + rng.Next(1, 6);
-            y = x + rng.Next(1, 6);
+            //x = x + rng.Next(1, 6);
+            //y = x + rng.Next(1, 6);
 
             // 
             int lParam = (y << 16) | (x & 0xFFFF);

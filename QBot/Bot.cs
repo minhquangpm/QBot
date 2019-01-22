@@ -34,6 +34,7 @@ namespace QMapleBot
 
         // init handle
         public static IntPtr hwnd;
+        public static IntPtr thumb;
         //public static int emulator;
         private static bool checkHwnd = false;
         private static int pid;
@@ -159,6 +160,7 @@ namespace QMapleBot
                     {
                         // handle nox
                         hwnd = nox.MainWindowHandle;
+                        
 
                         // change nox title
                         string nox_commandline = nox.GetCommandLine();
